@@ -6,16 +6,16 @@ namespace L01_RandomPoem {
 
     //console.log(subjekte, prädikate, objekte);
 
-    for (let i: number =  subjekte.length; i > 0 ; i--) {
+    for (let i: number = subjekte.length; i > 0; i--) {
         // console.log(i);
- console.log(getVerse(subjekte, prädikate, objekte));   
-}     
+        console.log(getVerse(subjekte, prädikate, objekte));
+    }
 
     function getVerse(_subjekte: string[], _prädikate: string[], _objekte: string[]): string {
 
         let vers: string = " ";
         let randomNumber: number;
-        
+
         randomNumber = Math.floor(Math.random() * _subjekte.length);
         let zufallsSubjekt: string[] = _subjekte.splice(randomNumber, 1);
 
@@ -28,6 +28,7 @@ namespace L01_RandomPoem {
         vers = zufallsSubjekt + " " + zufallsPrädikat + " " + zufallsObjekt;
 
 
-        
+
         return vers;
-}}
+    }
+}
