@@ -5,14 +5,14 @@ var L02_EventInspector;
 (function (L02_EventInspector) {
     window.addEventListener("load", handleLoad);
     function handleLoad(_event) {
-        console.log(_event);
+        //console.log(_event);
         document.addEventListener("mousemove", setInfoBox);
         document.addEventListener("click", logInfo);
         document.addEventListener("keyup", logInfo);
         document.querySelector("body").addEventListener("click", logInfo);
         document.querySelector("body").addEventListener("keyup", logInfo);
-        document.querySelector("div0").addEventListener("click", logInfo);
-        document.querySelector("div1").addEventListener("keyup", logInfo);
+        document.querySelector("#div0").addEventListener("click", logInfo);
+        document.querySelector("#div1").addEventListener("keyup", logInfo);
         document.querySelector("button").addEventListener("click", logButton);
     }
     function setInfoBox(_event) {
