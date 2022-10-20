@@ -1,3 +1,9 @@
+//A02 EventInspector
+//Jonas Atzenhofer MKB 271026
+//Quellen: Robert Schindler
+
+
+
 namespace L02_EventInspector {
 
     window.addEventListener("load", handleLoad);

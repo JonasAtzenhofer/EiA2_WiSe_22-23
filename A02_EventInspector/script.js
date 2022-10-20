@@ -1,3 +1,6 @@
+//A02 EventInspector
+//Jonas Atzenhofer MKB 271026
+//Quellen: Robert Schindler
 var L02_EventInspector;
 (function (L02_EventInspector) {
     window.addEventListener("load", handleLoad);
