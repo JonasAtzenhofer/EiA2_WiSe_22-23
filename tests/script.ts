@@ -1,12 +1,10 @@
+namespace L02_Load {
+    window.addEventListener("load", handleLoad);
 
-interface Student {
-    name: string;
-    matrikel: number;
-    grades: [module: string]: number;
+    function handleLoad(_event: Event): void {
+        console.log(_event);
+    }
 }
-let students: Student[] = [];
-
-students.push({name: "Big Brain", matrikel: 123456, grades: {"EIA1": 1.3, "EIA2": 1.0}});
 
 
 

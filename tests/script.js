@@ -1,3 +1,8 @@
-let students = [];
-students.push({ name: "Big Brain", matrikel: 123456, grades: { "EIA1": 1.3, "EIA2": 1.0 } });
+var L02_Load;
+(function (L02_Load) {
+    window.addEventListener("load", handleLoad);
+    function handleLoad(_event) {
+        console.log(_event);
+    }
+})(L02_Load || (L02_Load = {}));
 //# sourceMappingURL=script.js.map

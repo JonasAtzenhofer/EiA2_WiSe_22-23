@@ -1,0 +1,39 @@
+div {
+    height: 500px;
+    background-color: rgb(0, 0, 0);
+    width: 35%;
+    position: relative;
+}
+
+
+#div0 {
+  float: left;
+  margin-left: 10%;
+
+
+}
+
+#div1 {
+    float: right;
+    margin-right: 10%;
+
+}
+
+span {
+  position: fixed;
+  z-index: 3;
+  background-color: rgb(31, 31, 197);
+  height: 75px;
+  width: 150px;
+
+}
+
+button {
+  background-color: blue;
+  position: absolute;
+  height: 85px;
+  width: 85px;
+  top: 150px;
+  left: 200px;
+
+}
