@@ -29,6 +29,7 @@ var L02_EventInspector;
     function logButton(_event) {
         let button = document.querySelector("button");
         let event = new CustomEvent("CustomEvent", { bubbles: true });
+        dispatchEvent(_event);
     }
     function buttonClickEvent(_event) {
         console.log(_event);

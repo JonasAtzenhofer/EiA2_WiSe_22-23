@@ -54,6 +54,7 @@ namespace L02_EventInspector {
 
         let button: HTMLElement = <HTMLElement>document.querySelector("button");
         let event: CustomEvent = new CustomEvent("CustomEvent", { bubbles: true });
+        dispatchEvent(_event);
 
     }
 
