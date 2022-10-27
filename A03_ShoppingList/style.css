@@ -1,0 +1,64 @@
+body {
+    height: 100%;
+    width: 100%
+}
+
+div {
+    background-color: rgb(112, 112, 112);
+    text-align: center;
+    border: 0,3em;
+    border-color: black;
+    border-style: outset;
+    height: 2em ;
+    border-radius: 1em;
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+h1 {
+    text-align: center;
+}
+
+h2 {
+    text-align: center;
+}
+
+input {
+    background-color: rgb(183, 234, 235);
+    height: 75%;
+    width: 25%;
+}
+
+#addButton {
+    width: 10%;
+    background-color:  rgb(183, 234, 235);
+    height: 95%;
+    margin-left: 1%;
+    color: rgba(0, 0, 0, 0.516);
+}
+ #addButton:hover{
+    scale: 1.1;
+    color: black;
+
+}
+
+span {
+    background-color: rgb(183, 234, 235);
+
+}
+
+li {
+    background-color: rgb(183, 234, 235);
+    list-style-type: none;
+    position: relative;
+    text-align: left;
+
+}
+#trash {
+    margin-left: 20px;
+}
+
+#Overview {
+    height: 30em;
+}
