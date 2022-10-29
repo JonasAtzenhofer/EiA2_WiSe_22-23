@@ -1,7 +1,29 @@
-var L03_ShoppingList;
-(function (L03_ShoppingList) {
-    function handleLoad(_event) {
-        console.log("Event: Seite wird geladen");
+// Jonas Atzenhofer
+// Quellen: Yannick König, Robert Schindler
+var ShoppingList;
+(function (ShoppingList) {
+    window.addEventListener("load", handleLoad);
+    function handleLoad() {
+        let addButton = document.querySelector("button#add");
+        addButton.addEventListener("click", itemAdd);
+        let checkBought = document.querySelector("input#bought");
+        checkBought.addEventListener("change", itemBought);
+        let editButton = document.querySelector("button#edit");
+        editButton.addEventListener("click", editItem);
+        let deleteButton = document.querySelector("button#delete");
+        deleteButton.addEventListener("click", deleteItem);
     }
-})(L03_ShoppingList || (L03_ShoppingList = {}));
+    function itemAdd() {
+        console.log("Item hinzugefügt");
+    }
+    function itemBought() {
+        console.log("Item als gekauft markiert");
+    }
+    function editItem() {
+        console.log("Item editieren");
+    }
+    function deleteItem() {
+        console.log("Item löschen");
+    }
+})(ShoppingList || (ShoppingList = {}));
 //# sourceMappingURL=script.js.map

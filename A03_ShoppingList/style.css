@@ -1,64 +1,111 @@
-body {
+#body {
+    width: 100%;
     height: 100%;
-    width: 100%
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-div {
-    background-color: rgb(112, 112, 112);
-    text-align: center;
-    border: 0,3em;
-    border-color: black;
-    border-style: outset;
-    height: 2em ;
-    border-radius: 1em;
-    width: 80%;
-    margin-left: 10%;
-    margin-right: 10%;
-}
-
-h1 {
+h3 {
     text-align: center;
 }
-
-h2 {
+#addfield {
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    display: flex;
+    width: max-content;
+    min-width: 40em;
+    height: 3em;
     text-align: center;
+    border-style: solid;
+    border-color: rgba(0, 0, 0, 0.932);
+    border-width: 4px;
+    border-radius: 15px;
+    background-color: bisque;
+}
+
+#fieldset {
+    border: none;
 }
 
 input {
-    background-color: rgb(183, 234, 235);
-    height: 75%;
-    width: 25%;
-}
-
-#addButton {
-    width: 10%;
-    background-color:  rgb(183, 234, 235);
-    height: 95%;
-    margin-left: 1%;
-    color: rgba(0, 0, 0, 0.516);
-}
- #addButton:hover{
-    scale: 1.1;
-    color: black;
+    border-style: solid;
+    border-color: black;
+    border-width: 3px;
+    border-radius: 5px;
 
 }
 
-span {
-    background-color: rgb(183, 234, 235);
-
+#add {
+    margin: 1em;
+    background-color: rgba(255, 255, 255, 0.68);
+    text-align: center;
+    cursor: pointer;
+    scale: 0,4;
+    
 }
 
-li {
-    background-color: rgb(183, 234, 235);
-    list-style-type: none;
+#add:hover {
+   scale: 1,1;
+}
+
+#list {
     position: relative;
-    text-align: left;
+    margin: auto;
+    width: max-content;
+    height: 10em;
+    width: max-content; 
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+
+#lister {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    height: 5em;
+    width: max-content; 
+    min-width: 40em; 
+    border-style: solid;
+    border-color: black;
+    border-width: 4px;
+    border-radius: 15px;
+}
+
+#bought {
+    height: 2em;
+    width: 2em;
+    margin: auto;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+#ItemData {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 0.5em; 
+}
+
+.ItemDataFont {
+    font-size: 1.25em; 
+}
+
+#edit {
+    width: max-content;
+    margin: auto;
+    height: 2em;
+    margin-right: 2%;
 
 }
-#trash {
-    margin-left: 20px;
-}
 
-#Overview {
-    height: 30em;
+#delete {
+    width: max-content;
+    margin: auto;
+    height: 2em;
+    margin-right: 1%;
 }
