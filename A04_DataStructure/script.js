@@ -17,7 +17,7 @@ var ShoppingList;
         console.log("Item hinzugefügt");
     }
     function itemBought() {
-        console.log("Item als gekauft markiert");
+        console.log(ShoppingList.data);
     }
     function editItem() {
         console.log("Item editieren");

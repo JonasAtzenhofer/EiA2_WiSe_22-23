@@ -26,7 +26,7 @@ namespace ShoppingList {
     }
 
     function itemBought(): void {
-        console.log("Item als gekauft markiert");
+        console.log(data);
     }
 
     function editItem(): void {
