@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping List</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="datastructure.js"></script>
+    <script src="script.js" defer></script>
+</head>
+<body>
+<h3>Add Item</h3>
+<div id="addfield">
+    <form>
+    <fieldset id="fieldset">
+        <input type="text" name="newItem" placeholder="Add item..."/>
+        <input type="number" name="Amount" placeholder="Add amount..."/>
+        <input name="Comment" placeholder="Add comment..."/> 
+        <button type="button" id="add">Add Item</button>
+    </fieldset>
+    </form>
+</div>
+
+<h3>Shopping List</h3>
+<li id="list">
+    <div id="lister">
+        <input id="bought" type="checkbox">
+
+        <div id="ItemData">
+            <p class="ItemDataFont">Kartoffel</p>
+            <p class="ItemDataFont">1</p>
+            <p class="ItemDataFont">Festkochend</p>
+            <p class="ItemDataFont">29.11.22</p>
+        </div>
+            <button id="edit">Edit</button>
+            <button id="delete">Delete</button>
+    </div>
+</li>
+</body>
+</html>
