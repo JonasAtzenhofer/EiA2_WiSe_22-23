@@ -8,35 +8,26 @@
     <title>Shopping List</title>
     <link rel="stylesheet" href="style.css">
     <script src="datastructure.js"></script>
-    <script src="script.js" defer></script>
+    <script src="script.js"></script>
 </head>
+
 <body>
-<h3>Add Item</h3>
-<div id="addfield">
+    <h3>Add Item</h3>
+
     <form>
-    <fieldset id="fieldset">
-        <input type="text" name="newItem" placeholder="Add item..."/>
-        <input type="number" name="Amount" placeholder="Add amount..."/>
-        <input name="Comment" placeholder="Add comment..."/> 
-        <button type="button" id="add">Add Item</button>
-    </fieldset>
-    </form>
-</div>
-
-<h3>Shopping List</h3>
-<li id="list">
-    <div id="lister">
-        <input id="bought" type="checkbox">
-
-        <div id="ItemData">
-            <p class="ItemDataFont">Kartoffel</p>
-            <p class="ItemDataFont">1</p>
-            <p class="ItemDataFont">Festkochend</p>
-            <p class="ItemDataFont">29.11.22</p>
+        <div id="addfield">
+            <fieldset id="fieldset">
+                <input type="text" name="newItem" placeholder="Add item..." />
+                <input type="number" name="amount" placeholder="Add amount..." />
+                <input name="comment" placeholder="Add comment..." />
+                <button type="button" id="add">Add Item</button>
+            </fieldset>
         </div>
-            <button id="edit">Edit</button>
-            <button id="delete">Delete</button>
-    </div>
-</li>
+    </form>
+    <h3>Shopping List</h3>
+    <li id="list">
+
+    </li>
 </body>
+
 </html>

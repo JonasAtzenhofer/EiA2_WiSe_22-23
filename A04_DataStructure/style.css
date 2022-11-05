@@ -2,7 +2,10 @@
     width: 100%;
     height: 100%;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: beige;
 }
+
+
 
 h3 {
     text-align: center;
@@ -15,52 +18,55 @@ h3 {
     display: flex;
     width: max-content;
     min-width: 40em;
-    height: 3em;
+    height: 5em;
     text-align: center;
     border-style: solid;
-    border-color: rgba(0, 0, 0, 0.932);
-    border-width: 4px;
+    border-color: black;
+    border-width: 2px;
     border-radius: 15px;
-    background-color: bisque;
 }
 
 #fieldset {
     border: none;
+    background-color: blue;
 }
 
 input {
     border-style: solid;
     border-color: black;
-    border-width: 3px;
+    border-width: 2px;
     border-radius: 5px;
 
 }
 
 #add {
     margin: 1em;
-    background-color: rgba(255, 255, 255, 0.68);
+    background-color: white;
+    height: max-content;
+    width: max-content;
     text-align: center;
-    cursor: pointer;
-    scale: 0,4;
-    
-}
-
-#add:hover {
-   scale: 1,1;
+    border-style: solid;
+    border-color: black;
+    border-width: 2px;
+    border-radius: 5px;
 }
 
 #list {
+    display: flex;
+    flex-direction: column;
+    gap: 1em; 
     position: relative;
     margin: auto;
     width: max-content;
-    height: 10em;
+    height: max-content;
     width: max-content; 
     display: flex;
     align-content: center;
     justify-content: center;
+    background-color: rgba(0, 0, 255, 0.703);
 }
 
-#lister {
+.lister {
     display: flex;
     align-content: center;
     justify-content: center;
@@ -69,11 +75,11 @@ input {
     min-width: 40em; 
     border-style: solid;
     border-color: black;
-    border-width: 4px;
+    border-width: 2px;
     border-radius: 15px;
 }
 
-#bought {
+.bought {
     height: 2em;
     width: 2em;
     margin: auto;
@@ -81,7 +87,7 @@ input {
     margin-right: 5%;
 }
 
-#ItemData {
+.ItemData {
     position: relative;
     height: 100%;
     width: 100%;
@@ -95,7 +101,7 @@ input {
     font-size: 1.25em; 
 }
 
-#edit {
+.edit {
     width: max-content;
     margin: auto;
     height: 2em;
@@ -103,7 +109,7 @@ input {
 
 }
 
-#delete {
+.delete {
     width: max-content;
     margin: auto;
     height: 2em;
