@@ -22,19 +22,21 @@ h3 {
     text-align: center;
     border-style: solid;
     border-color: black;
-    border-width: 2px;
+    border-width: 10px;
     border-radius: 15px;
+    background-color: blue;
+
 }
 
 #fieldset {
     border: none;
-    background-color: blue;
+    
 }
 
 input {
     border-style: solid;
     border-color: black;
-    border-width: 2px;
+    border-width: 5px;
     border-radius: 5px;
 
 }
@@ -63,7 +65,7 @@ input {
     display: flex;
     align-content: center;
     justify-content: center;
-    background-color: rgba(0, 0, 255, 0.703);
+    
 }
 
 .lister {
@@ -75,8 +77,9 @@ input {
     min-width: 40em; 
     border-style: solid;
     border-color: black;
-    border-width: 2px;
+    border-width: 10px;
     border-radius: 15px;
+    background-color: blue;
 }
 
 .bought {
@@ -85,6 +88,7 @@ input {
     margin: auto;
     margin-left: 5%;
     margin-right: 5%;
+    background-color: black;
 }
 
 .ItemData {
