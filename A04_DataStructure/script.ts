@@ -100,7 +100,7 @@ namespace ShoppingList {
     }
 
     function deleteItem(_event: Event): void {
-        let trigger: string = (_event.target as HTMLButtonElement).id
+        let trigger: string = (_event.target as HTMLButtonElement).id;
         let triggerNum: string = trigger.replace(/\D/g, "");
         let identifyer: number = parseInt(triggerNum); 
 
