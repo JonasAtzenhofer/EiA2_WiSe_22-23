@@ -1,5 +1,5 @@
 // Jonas Atzenhofer
-// Quellen: Yannick König, Robert Schindler
+// Quellen: Yannick König, Robert Schindler,
 var ShoppingList;
 (function (ShoppingList) {
     window.addEventListener("load", handleLoad);
