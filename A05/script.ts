@@ -1,20 +1,35 @@
 // Jonas Atzenhofer
-// Quellen: Yannick König, Robert Schindler,
+// Quellen: Yannick König, Robert Schindler, Henning Pils, Tristan Broghammer 
 
 
 
 namespace ShoppingListL05 {
     window.addEventListener("load", handleLoad);
 
-    let datastructureJSON: string =  "";
 
     let itemNumber: number = 0;
 
-    function handleLoad(): void {
-        let addButton: HTMLButtonElement = document.querySelector("button#add");
-        addButton.addEventListener("click", itemAdd); 
+    interface ItemAdded {
+        newItem: string;
+        Amount: number;
+        Comment: string;
+        bought: boolean;
+        date: string;
 
+    }
+
+
+
+    export interface Data {
+        [itemNumber: number]: ItemAdded[];
+    }
+
+    async function handleLoad(): Promise<void> {
+        let addButton: HTMLButtonElement = document.querySelector("button#add");
+        addButton.addEventListener("click", itemAdd);
         
+
+
     }
 
     function itemAdd(): void {
@@ -30,11 +45,11 @@ namespace ShoppingListL05 {
         let date: string = "30.02.2222";
         itemNumber++;
 
-        createInput(newInput, newDiv); 
+        createInput(newInput, newDiv);
 
-        createDiv(newDiv); 
+        createDiv(newDiv);
 
-        createItemDiv(divItemData, newDiv); 
+        createItemDiv(divItemData, newDiv);
 
         addElement(divItemData);
 
@@ -42,13 +57,13 @@ namespace ShoppingListL05 {
 
         addElement(divItemData, amount.toString());
 
-        addElement(divItemData, comment.toString()); 
+        addElement(divItemData, comment.toString());
 
-        addElement(divItemData, date); 
+        addElement(divItemData, date);
 
-        addButton(newDiv, "edit"); 
+        addButton(newDiv, "edit");
 
-        addButton(newDiv, "delete"); 
+        addButton(newDiv, "delete");
 
         list.appendChild(newDiv);
 
@@ -75,7 +90,7 @@ namespace ShoppingListL05 {
             case "edit":
                 newButton.addEventListener("click", editItem);
                 break;
-            case "delete": 
+            case "delete":
                 newButton.addEventListener("click", deleteItem);
             default:
                 break;
@@ -99,8 +114,8 @@ namespace ShoppingListL05 {
         _parent.appendChild(_element);
         _element.setAttribute("class", "ItemData");
         _element.setAttribute("id", "ItemData" + itemNumber);
-    }; 
-    
+    }
+
     function itemBought(_event: Event): void {
         let trigger: string = (_event.target as HTMLInputElement).id;
         let triggerNum: string = trigger.replace(/\D/g, "");
@@ -115,7 +130,7 @@ namespace ShoppingListL05 {
     }
 
     function deleteItem(_event: Event): void {
-        let trigger: string = (_event.target as HTMLButtonElement).id
+        let trigger: string = (_event.target as HTMLButtonElement).id;
         let triggerNum: string = trigger.replace(/\D/g, "");
         let identifyer: number = parseInt(triggerNum);
 
