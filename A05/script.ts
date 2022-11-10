@@ -4,20 +4,18 @@
 
 
 namespace ShoppingListL05 {
-    window.addEventListener("load", handleLoad);
-
+    let itemNumber: number = 0;
     let date: Date = new Date();
     let dateWithoutTime: string = date.getDate() + "." + (date.getMonth() + 1) + "." + date.getFullYear();
+    
+    
+    window.addEventListener("load", handleLoad);
 
-
-
-
-    let itemNumber: number = 0;
 
     interface ItemAdded {
         newItem: string;
-        Amount: number;
-        Comment: string;
+        amount: number;
+        comment: string;
         bought: boolean;
         date: string;
 
@@ -26,7 +24,7 @@ namespace ShoppingListL05 {
 
 
     interface Data {
-        [itemNumber: number]: ItemAdded[];
+        [1]: ItemAdded[];
     }
 
     async function handleLoad(_event: Event): Promise<void> {
@@ -48,12 +46,34 @@ namespace ShoppingListL05 {
         console.log(values[0].newItem);
 
         let newItem: string = values[0].newItem;
-        let Amount: number = values[0].Amount;
-        let Comment: string = values[0].Comment;
+        let amount: number = values[0].amount;
+        let comment: string = values[0].comment;
         let list: HTMLElement = document.getElementById("list");
         let newDiv: HTMLDivElement = document.createElement("div");
         let newInput: HTMLInputElement = document.createElement("input");
         let divItemData: HTMLDivElement = document.createElement("div");
+        
+        createInput(newInput, newDiv);
+
+        createDiv(newDiv);
+
+        createItemDiv(divItemData, newDiv);
+
+        addElement(divItemData);
+
+        addElement(divItemData, newItem.toString());
+
+        addElement(divItemData, amount.toString());
+
+        addElement(divItemData, comment.toString());
+
+        addElement(divItemData, dateWithoutTime);
+
+        addButton(newDiv, "edit");
+
+        addButton(newDiv, "delete");
+
+        list.appendChild(newDiv);
 
 
     }
@@ -67,7 +87,6 @@ namespace ShoppingListL05 {
         let newDiv: HTMLDivElement = document.createElement("div");
         let newInput: HTMLInputElement = document.createElement("input");
         let divItemData: HTMLDivElement = document.createElement("div");
-        let bought: boolean = false;
         itemNumber++;
 
         createInput(newInput, newDiv);
@@ -94,7 +113,7 @@ namespace ShoppingListL05 {
 
         
         let query: URLSearchParams = new URLSearchParams(<any>formData);
-        await fetch("index.html" + "?" + query.toString());
+        await fetch("index.html?" + query.toString());
         console.log(query.toString());
         alert ("Item added");
 

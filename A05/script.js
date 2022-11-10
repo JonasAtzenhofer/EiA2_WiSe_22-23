@@ -2,10 +2,10 @@
 // Quellen: Yannick König!!!, Robert Schindler, Henning Pils, Tristan Broghammer 
 var ShoppingListL05;
 (function (ShoppingListL05) {
-    window.addEventListener("load", handleLoad);
+    let itemNumber = 0;
     let date = new Date();
     let dateWithoutTime = date.getDate() + "." + (date.getMonth() + 1) + "." + date.getFullYear();
-    let itemNumber = 0;
+    window.addEventListener("load", handleLoad);
     async function handleLoad(_event) {
         let addButton = document.querySelector("button#add");
         addButton.addEventListener("click", itemAdd);
@@ -18,12 +18,23 @@ var ShoppingListL05;
         let values = _data[1];
         console.log(values[0].newItem);
         let newItem = values[0].newItem;
-        let Amount = values[0].Amount;
-        let Comment = values[0].Comment;
+        let amount = values[0].amount;
+        let comment = values[0].comment;
         let list = document.getElementById("list");
         let newDiv = document.createElement("div");
         let newInput = document.createElement("input");
         let divItemData = document.createElement("div");
+        createInput(newInput, newDiv);
+        createDiv(newDiv);
+        createItemDiv(divItemData, newDiv);
+        addElement(divItemData);
+        addElement(divItemData, newItem.toString());
+        addElement(divItemData, amount.toString());
+        addElement(divItemData, comment.toString());
+        addElement(divItemData, dateWithoutTime);
+        addButton(newDiv, "edit");
+        addButton(newDiv, "delete");
+        list.appendChild(newDiv);
     }
     async function itemAdd() {
         let formData = new FormData(document.querySelector("form"));
@@ -34,7 +45,6 @@ var ShoppingListL05;
         let newDiv = document.createElement("div");
         let newInput = document.createElement("input");
         let divItemData = document.createElement("div");
-        let bought = false;
         itemNumber++;
         createInput(newInput, newDiv);
         createDiv(newDiv);
@@ -48,7 +58,7 @@ var ShoppingListL05;
         addButton(newDiv, "delete");
         list.appendChild(newDiv);
         let query = new URLSearchParams(formData);
-        await fetch("index.html" + "?" + query.toString());
+        await fetch("index.html?" + query.toString());
         console.log(query.toString());
         alert("Item added");
     }
