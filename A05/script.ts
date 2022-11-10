@@ -169,7 +169,6 @@ namespace ShoppingListL05 {
         let remIt: HTMLElement = document.getElementById("lister" + identifyer);
         list.removeChild(remIt);
     }
-
     
 
 }
