@@ -1,10 +1,15 @@
 // Jonas Atzenhofer
-// Quellen: Yannick König, Robert Schindler, Henning Pils, Tristan Broghammer 
+// Quellen: Yannick König!!!, Robert Schindler, Henning Pils, Tristan Broghammer 
 
 
 
 namespace ShoppingListL05 {
     window.addEventListener("load", handleLoad);
+
+    let date: Date = new Date();
+    let dateWithoutTime: string = date.getDate() + "." + (date.getMonth() + 1) + "." + date.getFullYear();
+
+
 
 
     let itemNumber: number = 0;
@@ -20,19 +25,40 @@ namespace ShoppingListL05 {
 
 
 
-    export interface Data {
+    interface Data {
         [itemNumber: number]: ItemAdded[];
     }
 
-    async function handleLoad(): Promise<void> {
+    async function handleLoad(_event: Event): Promise<void> {
         let addButton: HTMLButtonElement = document.querySelector("button#add");
         addButton.addEventListener("click", itemAdd);
-        
+
+        let response: Response = await fetch("https://jonasatzenhofer.github.io/EiA2_WiSe_22-23/A05/datastructure.json");
+        let item: string = await response.text();
+        let data: Data = JSON.parse(item);
+
+        generateExistingItem(data);
+
 
 
     }
 
-    function itemAdd(): void {
+    function generateExistingItem(_data: Data): void {
+        let values: ItemAdded[] = _data[1];
+        console.log(values[0].newItem);
+
+        let newItem: string = values[0].newItem;
+        let Amount: number = values[0].Amount;
+        let Comment: string = values[0].Comment;
+        let list: HTMLElement = document.getElementById("list");
+        let newDiv: HTMLDivElement = document.createElement("div");
+        let newInput: HTMLInputElement = document.createElement("input");
+        let divItemData: HTMLDivElement = document.createElement("div");
+
+
+    }
+        
+    async function itemAdd(): Promise<void> {
         let formData: FormData = new FormData(document.querySelector("form"));
         let newItem: FormDataEntryValue = formData.get("newItem");
         let amount: FormDataEntryValue = formData.get("amount");
@@ -42,7 +68,6 @@ namespace ShoppingListL05 {
         let newInput: HTMLInputElement = document.createElement("input");
         let divItemData: HTMLDivElement = document.createElement("div");
         let bought: boolean = false;
-        let date: string = "30.02.2222";
         itemNumber++;
 
         createInput(newInput, newDiv);
@@ -59,13 +84,19 @@ namespace ShoppingListL05 {
 
         addElement(divItemData, comment.toString());
 
-        addElement(divItemData, date);
+        addElement(divItemData, dateWithoutTime);
 
         addButton(newDiv, "edit");
 
         addButton(newDiv, "delete");
 
         list.appendChild(newDiv);
+
+        
+        let query: URLSearchParams = new URLSearchParams(<any>formData);
+        await fetch("index.html" + "?" + query.toString());
+        console.log(query.toString());
+        alert ("Item added");
 
     }
 
@@ -138,5 +169,7 @@ namespace ShoppingListL05 {
         let remIt: HTMLElement = document.getElementById("lister" + identifyer);
         list.removeChild(remIt);
     }
+
+    
 
 }
