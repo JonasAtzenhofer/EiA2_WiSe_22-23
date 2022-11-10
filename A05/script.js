@@ -1,15 +1,31 @@
 // Jonas Atzenhofer
-// Quellen: Yannick König, Robert Schindler,
+// Quellen: Yannick König!!!, Robert Schindler, Henning Pils, Tristan Broghammer 
 var ShoppingListL05;
 (function (ShoppingListL05) {
     window.addEventListener("load", handleLoad);
-    let datastructureJSON = "";
+    let date = new Date();
+    let dateWithoutTime = date.getDate() + "." + (date.getMonth() + 1) + "." + date.getFullYear();
     let itemNumber = 0;
-    function handleLoad() {
+    async function handleLoad(_event) {
         let addButton = document.querySelector("button#add");
         addButton.addEventListener("click", itemAdd);
+        let response = await fetch("https://jonasatzenhofer.github.io/EiA2_WiSe_22-23/A05/datastructure.json");
+        let item = await response.text();
+        let data = JSON.parse(item);
+        generateExistingItem(data);
     }
-    function itemAdd() {
+    function generateExistingItem(_data) {
+        let values = _data[1];
+        console.log(values[0].newItem);
+        let newItem = values[0].newItem;
+        let Amount = values[0].Amount;
+        let Comment = values[0].Comment;
+        let list = document.getElementById("list");
+        let newDiv = document.createElement("div");
+        let newInput = document.createElement("input");
+        let divItemData = document.createElement("div");
+    }
+    async function itemAdd() {
         let formData = new FormData(document.querySelector("form"));
         let newItem = formData.get("newItem");
         let amount = formData.get("amount");
@@ -19,7 +35,6 @@ var ShoppingListL05;
         let newInput = document.createElement("input");
         let divItemData = document.createElement("div");
         let bought = false;
-        let date = "30.02.2222";
         itemNumber++;
         createInput(newInput, newDiv);
         createDiv(newDiv);
@@ -28,10 +43,14 @@ var ShoppingListL05;
         addElement(divItemData, newItem.toString());
         addElement(divItemData, amount.toString());
         addElement(divItemData, comment.toString());
-        addElement(divItemData, date);
+        addElement(divItemData, dateWithoutTime);
         addButton(newDiv, "edit");
         addButton(newDiv, "delete");
         list.appendChild(newDiv);
+        let query = new URLSearchParams(formData);
+        await fetch("index.html" + "?" + query.toString());
+        console.log(query.toString());
+        alert("Item added");
     }
     function addElement(_parent, _content) {
         let newItemField = document.createElement("p");
@@ -74,7 +93,6 @@ var ShoppingListL05;
         _element.setAttribute("class", "ItemData");
         _element.setAttribute("id", "ItemData" + itemNumber);
     }
-    ;
     function itemBought(_event) {
         let trigger = _event.target.id;
         let triggerNum = trigger.replace(/\D/g, "");
