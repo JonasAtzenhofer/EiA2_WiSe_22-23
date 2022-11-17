@@ -27,15 +27,22 @@ namespace ShoppingListL06 {
         [1]: ItemAdded[];
     }
 
+
+
+
+
     async function handleLoad(_event: Event): Promise<void> {
         let addButton: HTMLButtonElement = document.querySelector("button#add");
         addButton.addEventListener("click", itemAdd);
 
-        let response: Response = await fetch("https://webuser.hs-furtwangen.de/~atzenhof/ShoppingList/datastructure.json");
+        let response: Response = await fetch("https://jonasatzenhofer.github.io/EiA2_WiSe_22-23/A05/datastructure.json");
         let item: string = await response.text();
         let data: Data = JSON.parse(item);
 
         generateExistingItem(data);
+
+
+
 
 
 
@@ -190,8 +197,7 @@ namespace ShoppingListL06 {
             saveButton.setAttribute("id", "edit" + identifyer);
             saveButton.addEventListener("click", editItem);
         };
-        let checkbox: HTMLElement = document.getElementById("bought" + identifyer);
-        checkbox.setAttribute("disabled", "true");
+        
 
 
         let saveButton: HTMLElement = document.getElementById("edit" + identifyer);
@@ -199,6 +205,10 @@ namespace ShoppingListL06 {
         saveButton.setAttribute("id", "save" + identifyer);
         saveButton.removeEventListener("click", editItem);
         saveButton.addEventListener("click", saveItem);
+
+
+
+
 
 
 

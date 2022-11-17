@@ -9,7 +9,7 @@ var ShoppingListL06;
     async function handleLoad(_event) {
         let addButton = document.querySelector("button#add");
         addButton.addEventListener("click", itemAdd);
-        let response = await fetch("https://webuser.hs-furtwangen.de/~atzenhof/ShoppingList/datastructure.json");
+        let response = await fetch("https://jonasatzenhofer.github.io/EiA2_WiSe_22-23/A05/datastructure.json");
         let item = await response.text();
         let data = JSON.parse(item);
         generateExistingItem(data);
@@ -126,8 +126,6 @@ var ShoppingListL06;
             saveButton.setAttribute("id", "edit" + identifyer);
             saveButton.addEventListener("click", editItem);
         };
-        let checkbox = document.getElementById("bought" + identifyer);
-        checkbox.setAttribute("disabled", "true");
         let saveButton = document.getElementById("edit" + identifyer);
         saveButton.innerHTML = "save";
         saveButton.setAttribute("id", "save" + identifyer);
