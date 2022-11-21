@@ -41,6 +41,7 @@ namespace ShoppingList_06 {
 
         generateExistingItem(data);
     }
+    
 
     function generateExistingItem(_data: ReturnedJSON): void {
         let keys: string[] = Object.keys(_data.data);
