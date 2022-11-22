@@ -7,7 +7,7 @@ namespace ShoppingList_06 {
     let itemNumber: number = 0;
     let date: Date = new Date();
     let dateWithoutTime: string = date.getDate() + "." + (date.getMonth() + 1) + "." + date.getFullYear();
-    let url: string = "https://webuser.hs-furtwangen.de/~atzenhof/Database/index.php";
+    let url: string = "https://webuser.hs-furtwangen.de/~atzenhof/Database/index.php/";
     
     
     window.addEventListener("load", handleLoad);

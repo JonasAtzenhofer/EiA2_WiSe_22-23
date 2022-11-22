@@ -10,6 +10,9 @@ let crc2: CanvasRenderingContext2D = canvas.getContext("2d");
 
 crc2.fillStyle = "#ffffff";
 crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height);
+
+
+
 crc2.beginPath();
 crc2.arc(100, 100, 20, 0, 1.5 * Math.PI);
 crc2.closePath();
@@ -36,6 +39,8 @@ gradient.addColorStop(1, "gold");
 
 crc2.fillStyle = gradient;
 crc2.fillRect(0, 0, 200, 100);
+
+
 
 
 }
