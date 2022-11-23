@@ -8,7 +8,7 @@ namespace L08CanvasCreativeArt {
         let canvas: HTMLCanvasElement = <HTMLCanvasElement>document.querySelector("canvas");
         let crc2: CanvasRenderingContext2D = <CanvasRenderingContext2D>canvas.getContext("2d");
 
-        //das canvas soll den gesamten Bildschirm ausfüllen
+        
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
