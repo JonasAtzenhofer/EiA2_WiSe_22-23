@@ -1,10 +1,9 @@
-var L07CanvasÜbungen;
-(function (L07CanvasÜbungen) {
+var L08CanvasCreativeArt;
+(function (L08CanvasCreativeArt) {
     window.addEventListener("load", handleLoad);
     function handleLoad(_event) {
         let canvas = document.querySelector("canvas");
         let crc2 = canvas.getContext("2d");
-        //das canvas soll den gesamten Bildschirm ausfüllen
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
         //zufällige Kreise 
@@ -14,6 +13,9 @@ var L07CanvasÜbungen;
             let y = Math.random() * crc2.canvas.height;
             crc2.arc(x, y, 20, 0, 2 * Math.PI);
         }
+        // entferne die Linieneigenschaften
+        crc2.lineWidth = 0;
+        crc2.strokeStyle = "black";
         crc2.closePath();
         crc2.stroke();
         // zufällige bunte Rechtecke
@@ -27,8 +29,12 @@ var L07CanvasÜbungen;
             crc2.fillStyle = color;
             crc2.fillRect(x, y, width, height);
         }
-        // transparenter Hintergrund 
-        crc2.fillStyle = "rgba(100, 0, 0, 0.4)";
+        // transparenter Hintergrund mit Farbverlauf
+        let gradient = crc2.createLinearGradient(0, 0, 0, crc2.canvas.height);
+        gradient.addColorStop(0, "HSLA(240, 100%, 50%, 0.5)");
+        gradient.addColorStop(1, "HSLA(0, 100%, 50%, 0.5)");
+        gradient.addColorStop(0.5, "HSLA(120, 100%, 50%, 0.5)");
+        crc2.fillStyle = gradient;
         crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height);
         crc2.beginPath();
         for (let i = 0; i < 75; i++) {
@@ -40,6 +46,22 @@ var L07CanvasÜbungen;
             crc2.arc(x, y, radius, 0, 2 * Math.PI);
             crc2.fill();
         }
+        let pattern = document.createElement("canvas").getContext("2d");
+        pattern.canvas.width = 80;
+        pattern.canvas.height = 40;
+        pattern.fillStyle = "#fec";
+        pattern.fillRect(0, 0, pattern.canvas.width, pattern.canvas.height);
+        pattern.lineTo(15, 15);
+        pattern.lineTo(25, 5);
+        pattern.lineTo(35, 5);
+        pattern.lineTo(45, 15);
+        pattern.lineTo(35, 25);
+        pattern.lineTo(25, 25);
+        pattern.lineTo(15, 15);
+        pattern.stroke();
+        crc2.globalAlpha = 0.5;
+        crc2.fillStyle = crc2.createPattern(pattern.canvas, "repeat");
+        crc2.fillRect(0, 0, canvas.width, canvas.height);
     }
-})(L07CanvasÜbungen || (L07CanvasÜbungen = {}));
+})(L08CanvasCreativeArt || (L08CanvasCreativeArt = {}));
 //# sourceMappingURL=script.js.map
