@@ -254,24 +254,24 @@ namespace ShoppingList_06 {
         let inputField0: HTMLElement = document.createElement("input");
         inputField0.setAttribute("type", "text"); 
         inputField0.setAttribute("name", "item");
-        inputField0.setAttribute("value", _values[0]); 
+        inputField0.setAttribute("value", _values[1]); 
         form.appendChild(inputField0);
 
         let inputField1: HTMLElement = document.createElement("input");
         inputField1.setAttribute("type", "number"); 
         inputField1.setAttribute("name", "amount");
-        inputField1.setAttribute("value", _values[1]); 
+        inputField1.setAttribute("value", _values[2]); 
         form.appendChild(inputField1);
 
         let inputField2: HTMLElement = document.createElement("input");
         inputField2.setAttribute("name", "comment");
-        inputField2.setAttribute("value", _values[2]); 
+        inputField2.setAttribute("value", _values[3]); 
         form.appendChild(inputField2);
         
         let inputField3: HTMLElement = document.createElement("input");
         inputField3.setAttribute("type", "text"); 
         inputField3.setAttribute("name", "date");
-        inputField3.setAttribute("value", _values[3]); 
+        inputField3.setAttribute("value", _values[4]); 
         form.appendChild(inputField3);        
     }
 

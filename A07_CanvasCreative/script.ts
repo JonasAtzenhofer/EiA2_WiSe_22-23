@@ -32,6 +32,7 @@ namespace L08CanvasCreativeArt {
             let color: string = "hsl(" + Math.random() * 360 + ", 100%, 50%)";
             crc2.fillStyle = color;
             crc2.fillRect(x, y, width, height);
+            crc2.closePath();
         }
 
         // transparenter Hintergrund mit Farbverlauf

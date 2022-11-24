@@ -25,6 +25,7 @@ var L08CanvasCreativeArt;
             let color = "hsl(" + Math.random() * 360 + ", 100%, 50%)";
             crc2.fillStyle = color;
             crc2.fillRect(x, y, width, height);
+            crc2.closePath();
         }
         // transparenter Hintergrund mit Farbverlauf
         let gradient = crc2.createLinearGradient(0, 0, 0, crc2.canvas.height);
