@@ -19,9 +19,6 @@ namespace L08CanvasCreativeArt {
             let y: number = Math.random() * crc2.canvas.height;
             crc2.arc(x, y, 20, 0, 2 * Math.PI);
         }
-        // entferne die Linieneigenschaften
-        crc2.lineWidth = 0;
-        crc2.strokeStyle = "black";
         crc2.closePath();
         crc2.stroke();
 
