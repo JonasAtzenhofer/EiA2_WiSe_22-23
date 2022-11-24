@@ -73,6 +73,17 @@ namespace L08CanvasCreativeArt {
         crc2.globalAlpha = 0.5;
         crc2.fillStyle = crc2.createPattern(pattern.canvas, "repeat");
         crc2.fillRect(0, 0, canvas.width, canvas.height);
+
+        // create multiple squares with a random color pattern and a random position
+        for (let i: number = 0; i < 50; i++) {
+            let x: number = Math.random() * canvas.width;
+            let y: number = Math.random() * canvas.height;
+            let width: number = Math.random() * 100;
+            let height: number = Math.random() * 100;
+            let color: string = "hsl(" + Math.random() * 360 + ", 100%, 50%)";
+            crc2.fillStyle = color;
+            crc2.fillRect(x, y, width, height);
+        }
     
 
 

@@ -60,6 +60,16 @@ var L08CanvasCreativeArt;
         crc2.globalAlpha = 0.5;
         crc2.fillStyle = crc2.createPattern(pattern.canvas, "repeat");
         crc2.fillRect(0, 0, canvas.width, canvas.height);
+        // create multiple squares with a random color pattern and a random position
+        for (let i = 0; i < 50; i++) {
+            let x = Math.random() * canvas.width;
+            let y = Math.random() * canvas.height;
+            let width = Math.random() * 100;
+            let height = Math.random() * 100;
+            let color = "hsl(" + Math.random() * 360 + ", 100%, 50%)";
+            crc2.fillStyle = color;
+            crc2.fillRect(x, y, width, height);
+        }
     }
 })(L08CanvasCreativeArt || (L08CanvasCreativeArt = {}));
 //# sourceMappingURL=script.js.map
