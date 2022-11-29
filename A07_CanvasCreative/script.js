@@ -47,20 +47,17 @@ var L08CanvasCreativeArt;
         let pattern = document.createElement("canvas").getContext("2d");
         pattern.canvas.width = 80;
         pattern.canvas.height = 40;
-        pattern.fillStyle = "#fec";
-        pattern.fillRect(0, 0, pattern.canvas.width, pattern.canvas.height);
-        pattern.lineTo(15, 15);
-        pattern.lineTo(25, 5);
-        pattern.lineTo(35, 5);
-        pattern.lineTo(45, 15);
-        pattern.lineTo(35, 25);
-        pattern.lineTo(25, 25);
-        pattern.lineTo(15, 15);
+        //create a random pattern with 200 circles
+        pattern.fillStyle = "black";
+        pattern.strokeStyle = "black";
+        pattern.lineWidth = 5;
+        pattern.beginPath();
+        for (let i = 0; i < 200; i++) {
+            pattern.arc(Math.random() * pattern.canvas.width, Math.random() * pattern.canvas.height, 10, 0, 2 * Math.PI);
+        }
+        pattern.closePath();
+        pattern.fill();
         pattern.stroke();
-        crc2.globalAlpha = 0.5;
-        crc2.fillStyle = crc2.createPattern(pattern.canvas, "repeat");
-        crc2.fillRect(0, 0, canvas.width, canvas.height);
-        // create multiple squares with a random color pattern and a random position
         for (let i = 0; i < 50; i++) {
             let x = Math.random() * canvas.width;
             let y = Math.random() * canvas.height;
