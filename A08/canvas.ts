@@ -45,6 +45,18 @@ namespace A08 {
         drawTree({ x: 1500, y: 500 }, { x: 50, y: 100 });
         drawSnowflakes({ x: 0, y: 0 }, { x: 0, y: 0 });
         drawSnowman({ x: 600, y: 700 }, { x: 50, y: 100 });
+        drawHouse({ x: 900, y: 800 }, { x: 50, y: 100 });
+        
+
+
+
+
+      
+
+        
+        
+        
+
         
         
         
@@ -145,6 +157,10 @@ namespace A08 {
 
         function drawTree(_position: Vector, _size: Vector): void {
             console.log("Tree", _position, _size);
+            
+            crc2.fillStyle = "brown";
+            crc2.fillRect(_position.x, _position.y, 20, -100);
+
 
             let nBranches: number = 10;
             let maxRadius: number = 60;
@@ -152,6 +168,7 @@ namespace A08 {
             branch.arc(0, 0, maxRadius, 0, 2 * Math.PI);
             crc2.fillStyle = "green";
             crc2.fillRect(_position.x, _position.y, 20, -_size.y);
+            
 
             crc2.save();
             crc2.translate(_position.x, _position.y);
@@ -166,17 +183,18 @@ namespace A08 {
                 nBranches -= 1;
             } while (nBranches > 0);
 
+            
+
             crc2.restore();
-        }
-
-
-
-
-
-
-           
 
             
+            crc2.fillStyle = "brown";
+            crc2.fillRect(_position.x, _position.y, 20, -100);
+
+
+
+        }
+ 
         
 
         function drawSnowflakes(_position: Vector, _size: Vector): void {
@@ -214,13 +232,37 @@ namespace A08 {
             crc2.arc(0, -140, 30, 0, 2 * Math.PI);
             crc2.fill();
             crc2.stroke();
-           
+
+            crc2.fillStyle = "black";
+            crc2.beginPath();
+            crc2.arc(-10, -150, 5, 0, 2 * Math.PI);
+            crc2.fill();
+            crc2.beginPath();
+            crc2.arc(10, -150, 5, 0, 2 * Math.PI);
+            crc2.fill();
+            crc2.fillStyle = "orange";
+            crc2.beginPath();
+            crc2.arc(0, -145, 5, 0, 2 * Math.PI);
+            crc2.fill();
+            crc2.fillStyle = "black";
+            crc2.beginPath();
+            crc2.arc(0, -130, 10, 0, 1 * Math.PI);
+            crc2.fill();
+          
+
+            crc2.restore();
 
         }
 
+        function drawHouse(_position: Vector, _size: Vector): void {
+            console.log("House", _position, _size);
+
+        
+
+
+        }
        
-
-
+      
 
     }
 }

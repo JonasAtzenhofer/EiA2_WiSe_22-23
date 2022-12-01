@@ -31,6 +31,7 @@ var A08;
         drawTree({ x: 1500, y: 500 }, { x: 50, y: 100 });
         drawSnowflakes({ x: 0, y: 0 }, { x: 0, y: 0 });
         drawSnowman({ x: 600, y: 700 }, { x: 50, y: 100 });
+        drawHouse({ x: 900, y: 800 }, { x: 50, y: 100 });
         function drawBackground() {
             console.log("Background");
             let gradient = crc2.createLinearGradient(0, 0, 0, crc2.canvas.height);
@@ -102,6 +103,8 @@ var A08;
         }
         function drawTree(_position, _size) {
             console.log("Tree", _position, _size);
+            crc2.fillStyle = "brown";
+            crc2.fillRect(_position.x, _position.y, 20, -100);
             let nBranches = 10;
             let maxRadius = 60;
             let branch = new Path2D();
@@ -120,6 +123,8 @@ var A08;
                 nBranches -= 1;
             } while (nBranches > 0);
             crc2.restore();
+            crc2.fillStyle = "brown";
+            crc2.fillRect(_position.x, _position.y, 20, -100);
         }
         function drawSnowflakes(_position, _size) {
             console.log("Snowflakes", _position, _size);
@@ -150,6 +155,25 @@ var A08;
             crc2.arc(0, -140, 30, 0, 2 * Math.PI);
             crc2.fill();
             crc2.stroke();
+            crc2.fillStyle = "black";
+            crc2.beginPath();
+            crc2.arc(-10, -150, 5, 0, 2 * Math.PI);
+            crc2.fill();
+            crc2.beginPath();
+            crc2.arc(10, -150, 5, 0, 2 * Math.PI);
+            crc2.fill();
+            crc2.fillStyle = "orange";
+            crc2.beginPath();
+            crc2.arc(0, -145, 5, 0, 2 * Math.PI);
+            crc2.fill();
+            crc2.fillStyle = "black";
+            crc2.beginPath();
+            crc2.arc(0, -130, 10, 0, 1 * Math.PI);
+            crc2.fill();
+            crc2.restore();
+        }
+        function drawHouse(_position, _size) {
+            console.log("House", _position, _size);
         }
     }
 })(A08 || (A08 = {}));
