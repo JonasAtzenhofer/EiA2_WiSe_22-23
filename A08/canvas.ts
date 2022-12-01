@@ -169,6 +169,16 @@ namespace A08 {
             crc2.restore();
         }
 
+
+
+
+
+
+           
+
+            
+        
+
         function drawSnowflakes(_position: Vector, _size: Vector): void {
             console.log("Snowflakes", _position, _size);
 
