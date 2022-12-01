@@ -46,15 +46,7 @@ namespace A08 {
         drawSnowflakes({ x: 0, y: 0 }, { x: 0, y: 0 });
         drawSnowman({ x: 600, y: 700 }, { x: 50, y: 100 });
         
-       
         
-
-        
-
-    
-
-
-
         
 
         function drawBackground(): void {
@@ -217,14 +209,6 @@ namespace A08 {
         }
 
        
-
-
-    
-
-
-
-
-
 
 
 
