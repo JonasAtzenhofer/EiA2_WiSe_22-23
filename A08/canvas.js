@@ -105,7 +105,7 @@ var A08;
             let maxRadius = 60;
             let branch = new Path2D();
             branch.arc(0, 0, maxRadius, 0, 2 * Math.PI);
-            crc2.fillStyle = "green";
+            crc2.fillStyle = "darkgreen";
             crc2.fillRect(_position.x, _position.y, 20, -_size.y);
             crc2.save();
             crc2.translate(_position.x, _position.y);
@@ -166,6 +166,16 @@ var A08;
             crc2.beginPath();
             crc2.arc(0, -130, 10, 0, 1 * Math.PI);
             crc2.fill();
+            crc2.beginPath();
+            crc2.moveTo(-20, -100);
+            crc2.lineTo(-50, -130);
+            crc2.lineWidth = 3;
+            crc2.stroke();
+            crc2.beginPath();
+            crc2.moveTo(20, -100);
+            crc2.lineTo(50, -130);
+            crc2.lineWidth = 3;
+            crc2.stroke();
             crc2.restore();
         }
         function drawHouse(_position, _size) {
