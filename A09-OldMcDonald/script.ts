@@ -1,49 +1,73 @@
 namespace L09_OldMcDonald {
     window.addEventListener("load", handleLoad);
 
-    class Animal {
-        name: string;
-        sound: string;
-        species: string;
-        amount: number;
-        food: string;
+    let animal1: Animal = new Animal("Berta", "Muh", "Cow", "Grass", 5, 20, "Old McDonald had a farm, Muh Muh Muh");
+    let animal2: Animal = new Animal("Shaun", "Bäää", "Sheep", "Leaves", 2, 10, "and on his farm he had a Sheep, Bää bää bää");
+    let animal3: Animal = new Animal("Hans", "Wuff", "Dog", "Meat", 10, 30, "with a Wuff Wuff here and a Wuff Wuff there");
+    let animal4: Animal = new Animal("Karl", "Miau", "Cat", "Fish", 1, 5, "here a Miau, there a Miau, everywhere a Miau Miau");
+    let animal5: Animal = new Animal("Klaus", "Quak", "Duck", "Corn", 3, 15, "Old McDonald had a farm, Quak Quak Quak");
 
-        constructor(_name: string, _sound: string, _species: string, _amount: number, _food: string) {
-            this.name = _name;
-            this.sound = _sound;
-            this.species = _species;
-            this.amount = _amount;
-            this.food = _food;
-        }
-    }
-
+    let foodDisplay: HTMLDivElement;
+    let animalDisplay: HTMLDivElement;
+    let restartDay: HTMLButtonElement;
 
 
     function handleLoad(_event: Event): void {
 
-        let animal: Animal[] = [];
-        animal.push(new Animal("Paula", "Muuuh", "Cow", 20, "Grass"));
-        animal.push(new Animal("Peppa", "Oink", "Pig", 3, "Corn"));
-        animal.push(new Animal("Karl", "Määäh", "Sheep", 4, "Wheat"));
-        animal.push(new Animal("Bello", "Wuff", "Dog", 4, "Dogfood"));
-        animal.push(new Animal("Kitty", "Miau", "Cat", 4, "Catfood"));
+        foodDisplay = <HTMLDivElement>document.getElementById("food");
+        animalDisplay = <HTMLDivElement>document.getElementById("animals");
+        restartDay = <HTMLButtonElement>document.getElementById("restartDay");
 
-        let animalDiv: HTMLDivElement = document.createElement("div");
-        animalDiv.classList.add("animal");
-        console.log(this);
-        animalDiv.innerHTML = "<h3>" + animal[0].name + "</h3><p>" + animal[0].sound + "<h3><p>" + animal[0].species + "<h3><p>" + animal[0].amount + "<h3><p>" + animal[0].food + "</p>";
-        document.body.appendChild(animalDiv);
+        document.getElementById("restartDay").addEventListener("click", cow);
+        setTimeout(cow, 1500);
 
+        function cow(): void {
+            restartDay.style.display = "none";
+            animal1.foodAmount = animal1.foodAmount - animal1.foodEaten;
+            animalDisplay.innerHTML += animal1.format();
+            updateFoodCount();
+            setTimeout(sheep, 1500);
+        }
 
+        function sheep(): void {
+            animal2.foodAmount = animal2.foodAmount - animal2.foodEaten;
+            animalDisplay.innerHTML += animal2.format();
+            updateFoodCount();
+            setTimeout(dog, 1500);
+        }
+
+        function dog(): void {
+            animal3.foodAmount = animal3.foodAmount - animal3.foodEaten;
+            animalDisplay.innerHTML += animal3.format();
+            updateFoodCount();
+            setTimeout(cat, 1500);
+        }
+
+        function cat(): void {
+            animal4.foodAmount = animal4.foodAmount - animal4.foodEaten;
+            animalDisplay.innerHTML += animal4.format();
+            updateFoodCount();
+            setTimeout(duck, 1500);
+        }
+
+        function duck(): void {
+            restartDay.style.display = "inline";
+            animal5.foodAmount = animal5.foodAmount - animal5.foodEaten;
+            animalDisplay.innerHTML += animal5.format();
+            updateFoodCount();
+            
+        }
+
+        function updateFoodCount(): void {
+            foodDisplay.innerHTML = animal1.food() + animal2.food() + animal3.food() + animal4.food() + animal5.food();
+            
+            if (animal1.foodAmount <= 0 || animal2.foodAmount <= 0 || animal3.foodAmount <= 0 || animal4.foodAmount <= 0 || animal5.foodAmount <= 0) {
+                alert("Old MacDonald hat nicht genügend Futter da!");
+                
+            }
+        }
 
        
-
-
-
-
-        
-
-
 
 
     }
