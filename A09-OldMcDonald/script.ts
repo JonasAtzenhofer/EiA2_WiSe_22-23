@@ -21,7 +21,7 @@ namespace L09_OldMcDonald {
         document.getElementById("restartDay").addEventListener("click", cow);
         setTimeout(cow, 1500);
 
-        function cow(): void {
+        function cow(_event: Event): void {
             restartDay.style.display = "none";
             animal1.foodAmount = animal1.foodAmount - animal1.foodEaten;
             animalDisplay.innerHTML += animal1.format();
@@ -29,28 +29,28 @@ namespace L09_OldMcDonald {
             setTimeout(sheep, 1500);
         }
 
-        function sheep(): void {
+        function sheep(_event: Event): void {
             animal2.foodAmount = animal2.foodAmount - animal2.foodEaten;
             animalDisplay.innerHTML += animal2.format();
             updateFoodCount();
             setTimeout(dog, 1500);
         }
 
-        function dog(): void {
+        function dog(_event: Event): void {
             animal3.foodAmount = animal3.foodAmount - animal3.foodEaten;
             animalDisplay.innerHTML += animal3.format();
             updateFoodCount();
             setTimeout(cat, 1500);
         }
 
-        function cat(): void {
+        function cat(_event: Event): void {
             animal4.foodAmount = animal4.foodAmount - animal4.foodEaten;
             animalDisplay.innerHTML += animal4.format();
             updateFoodCount();
             setTimeout(duck, 1500);
         }
 
-        function duck(): void {
+        function duck(_event: Event): void {
             restartDay.style.display = "inline";
             animal5.foodAmount = animal5.foodAmount - animal5.foodEaten;
             animalDisplay.innerHTML += animal5.format();

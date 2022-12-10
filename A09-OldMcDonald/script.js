@@ -15,32 +15,32 @@ var L09_OldMcDonald;
         restartDay = document.getElementById("restartDay");
         document.getElementById("restartDay").addEventListener("click", cow);
         setTimeout(cow, 1500);
-        function cow() {
+        function cow(_event) {
             restartDay.style.display = "none";
             animal1.foodAmount = animal1.foodAmount - animal1.foodEaten;
             animalDisplay.innerHTML += animal1.format();
             updateFoodCount();
             setTimeout(sheep, 1500);
         }
-        function sheep() {
+        function sheep(_event) {
             animal2.foodAmount = animal2.foodAmount - animal2.foodEaten;
             animalDisplay.innerHTML += animal2.format();
             updateFoodCount();
             setTimeout(dog, 1500);
         }
-        function dog() {
+        function dog(_event) {
             animal3.foodAmount = animal3.foodAmount - animal3.foodEaten;
             animalDisplay.innerHTML += animal3.format();
             updateFoodCount();
             setTimeout(cat, 1500);
         }
-        function cat() {
+        function cat(_event) {
             animal4.foodAmount = animal4.foodAmount - animal4.foodEaten;
             animalDisplay.innerHTML += animal4.format();
             updateFoodCount();
             setTimeout(duck, 1500);
         }
-        function duck() {
+        function duck(_event) {
             restartDay.style.display = "inline";
             animal5.foodAmount = animal5.foodAmount - animal5.foodEaten;
             animalDisplay.innerHTML += animal5.format();
