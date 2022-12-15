@@ -1,29 +1,52 @@
-window.addEventListener("load", handleLoad);
-function handleLoad(_event) {
-    let canvas = document.querySelector("canvas");
-    let crc2 = canvas.getContext("2d");
-    crc2.fillStyle = "#ffffff";
-    crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height);
-    crc2.beginPath();
-    crc2.arc(100, 100, 20, 0, 1.5 * Math.PI);
-    crc2.closePath();
-    crc2.stroke();
-    let path = new Path2D();
-    path.arc(60, 60, 50, 0, 2 * Math.PI);
-    crc2.stroke(path);
-    crc2.beginPath();
-    crc2.moveTo(2.1, 1);
-    crc2.lineTo(2.1, 10);
-    crc2.moveTo(4.5, 1);
-    crc2.lineTo(4.5, 10);
-    crc2.moveTo(7.5, 1);
-    crc2.lineTo(10.5, 10);
-    crc2.stroke();
-    let gradient = crc2.createLinearGradient(0, 0, 0, 100);
-    gradient.addColorStop(0, "black");
-    gradient.addColorStop(.5, "red");
-    gradient.addColorStop(1, "gold");
-    crc2.fillStyle = gradient;
-    crc2.fillRect(0, 0, 200, 100);
+// Die Klasse "Snowflake" repräsentiert eine einzelne Schneeflocke
+class Snowflake {
+    // Die Eigenschaft "position" speichert die aktuelle Position der Schneeflocke
+    position;
+    // Die Methode "update" wird aufgerufen, um die Position der Schneeflocke zu aktualisieren
+    update() {
+        // Die Y-Position der Schneeflocke wird um 1 erhöht, um sie nach unten fallen zu lassen
+        this.position.y += 1;
+        // Wenn die Schneeflocke den unteren Bildschirmrand erreicht hat, wird ihre Y-Position wieder auf 0 gesetzt,
+        // um sie wieder von oben nach unten fallen zu lassen
+        if (this.position.y >= screen.height) {
+            this.position.y = 0;
+        }
+    }
+    // Die Methode "draw" wird aufgerufen, um die Schneeflocke auf dem Bildschirm zu zeichnen
+    draw() {
+        // Hier wird Code zum Zeichnen der Schneeflocke an der aktuellen Position eingefügt
+    }
+}
+// Die Klasse "SnowScene" repräsentiert die gesamte Szene mit den fallenen Schneeflocken
+class SnowScene {
+    // Die Eigenschaft "snowflakes" speichert ein Array mit allen Schneeflocken
+    snowflakes = [];
+    // Die Methode "update" wird aufgerufen, um die Positionen aller Schneeflocken zu aktualisieren
+    update() {
+        for (const snowflake of this.snowflakes) {
+            snowflake.update();
+        }
+    }
+    // Die Methode "draw" wird aufgerufen, um die Schneeflocken auf dem Bildschirm zu zeichnen
+    draw() {
+        for (const snowflake of this.snowflakes) {
+            snowflake.draw();
+        }
+    }
+}
+// Erstellen einer neuen Instanz der "SnowScene" -Klasse
+// tslint:disable-next-line: typedef
+const scene = new SnowScene();
+// Erstellen von 100 Schneeflocken und Hinzufügen zur Szene
+// tslint:disable-next-line: typedef
+for (let i = 0; i < 100; i++) {
+    // tslint:disable-next-line: typedef
+    const snowflake = new Snowflake();
+    // Zufällige X- und Y-Position für die Schneeflocke festlegen
+    snowflake.position = {
+        x: Math.random() * screen.width,
+        y: Math.random() * screen.height
+    };
+    scene.snowflakes.push(snowflake);
 }
 //# sourceMappingURL=script.js.map
