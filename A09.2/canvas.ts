@@ -11,7 +11,7 @@
 
 namespace A09_2 {
     window.addEventListener("load", handleLoad);
-    
+
 
 
     export let crc2: CanvasRenderingContext2D;
@@ -26,6 +26,9 @@ namespace A09_2 {
         crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
 
 
+        
+        window.setInterval(update, 20);
+
 
         drawBackground();
         drawSun(new Vector(100, 75));
@@ -39,181 +42,70 @@ namespace A09_2 {
         drawTree(new Vector(200, 500), new Vector(50, 100));
         drawTree(new Vector(255, 500), new Vector(50, 100));
         drawTree(new Vector(300, 500), new Vector(50, 100));
-        drawSnowflake(new Vector( ), new Vector());
+        drawSnowflake(new Vector(0, 0), new Vector(0, 0));
         drawSnowman(new Vector(100, 600), new Vector(100, 50));
         drawHouse(new Vector(250, 600), new Vector(50, 100));
         drawBird(new Vector(375, 585), new Vector(200, 100));
-        drawFlyingBird(new Vector(375, 585 ));
-        
-        
+        drawFlyingBird(new Vector(375, 585));
+
+    }
 
 
 
-        function drawBackground(): void {
-            console.log("Background");
+    function drawBackground(): void {
+        console.log("Background");
 
-            let gradient: CanvasGradient = crc2.createLinearGradient(0, 0, 0, crc2.canvas.height);
-            gradient.addColorStop(0, "darkblue");
-            gradient.addColorStop(0.5, "white");
-            gradient.addColorStop(0.8, "lightgrey");
-            gradient.addColorStop(1, "white");
+        let gradient: CanvasGradient = crc2.createLinearGradient(0, 0, 0, crc2.canvas.height);
+        gradient.addColorStop(0, "darkblue");
+        gradient.addColorStop(0.5, "white");
+        gradient.addColorStop(0.8, "lightgrey");
+        gradient.addColorStop(1, "white");
 
-            crc2.fillStyle = gradient;
-            crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height);
-        }
+        crc2.fillStyle = gradient;
+        crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height);
+    }
 
-        function drawSun(_position: Vector): void {
-            console.log("Sun", _position);
+    function drawSun(_position: Vector): void {
+        console.log("Sun", _position);
 
 
 
-            let r1: number = 30;
-            let r2: number = 100;
-            let gradient: CanvasGradient = crc2.createRadialGradient(0, 0, r1, 0, 0, r2);
+        let r1: number = 30;
+        let r2: number = 100;
+        let gradient: CanvasGradient = crc2.createRadialGradient(0, 0, r1, 0, 0, r2);
 
-            gradient.addColorStop(0, "HSLA(60, 100%, 90%, 1)");
-            gradient.addColorStop(1, "HSLA(60, 100%, 50%, 0)");
+        gradient.addColorStop(0, "HSLA(60, 100%, 90%, 1)");
+        gradient.addColorStop(1, "HSLA(60, 100%, 50%, 0)");
 
+        crc2.save();
+        crc2.translate(_position.x, _position.y);
+        crc2.fillStyle = gradient;
+        crc2.arc(0, 0, r2, 0, 2 * Math.PI);
+        crc2.fill();
+        crc2.restore();
+    }
+
+    function drawCloud(_position: Vector, _size: Vector): void {
+        console.log("Cloud", _position, _size);
+
+        let nParticles: number = 20;
+        let radiusParticle: number = 50;
+        let particle: Path2D = new Path2D();
+        let gradient: CanvasGradient = crc2.createRadialGradient(0, 0, 0, 0, 0, radiusParticle);
+
+        particle.arc(0, 0, radiusParticle, 0, 2 * Math.PI);
+        gradient.addColorStop(0, "HSLA(0, 100%, 100%, 0.5)");
+        gradient.addColorStop(1, "HSLA(0, 100%, 100%, 0)");
+
+        crc2.save();
+        crc2.translate(_position.x, _position.y);
+        crc2.fillStyle = gradient;
+
+        for (let drawn: number = 0; drawn < nParticles; drawn++) {
             crc2.save();
-            crc2.translate(_position.x, _position.y);
-            crc2.fillStyle = gradient;
-            crc2.arc(0, 0, r2, 0, 2 * Math.PI);
-            crc2.fill();
-            crc2.restore();
-        }
-
-        function drawCloud(_position: Vector, _size: Vector): void {
-            console.log("Cloud", _position, _size);
-
-            let nParticles: number = 20;
-            let radiusParticle: number = 50;
-            let particle: Path2D = new Path2D();
-            let gradient: CanvasGradient = crc2.createRadialGradient(0, 0, 0, 0, 0, radiusParticle);
-
-            particle.arc(0, 0, radiusParticle, 0, 2 * Math.PI);
-            gradient.addColorStop(0, "HSLA(0, 100%, 100%, 0.5)");
-            gradient.addColorStop(1, "HSLA(0, 100%, 100%, 0)");
-
-            crc2.save();
-            crc2.translate(_position.x, _position.y);
-            crc2.fillStyle = gradient;
-
-            for (let drawn: number = 0; drawn < nParticles; drawn++) {
-                crc2.save();
-                let x: number = (Math.random() - 0.5) * _size.x;
-                let y: number = - (Math.random() * _size.y);
-                crc2.translate(x, y);
-                crc2.fill(particle);
-                crc2.restore();
-            }
-
-            crc2.restore();
-        }
-
-        function drawMountains(_position: Vector, _min: number, _max: number, _colorLow: string, _colorHigh: string): void {
-            console.log("Mountains");
-
-            let stepMin: number = 50;
-            let stepMax: number = 150;
-            let x: number = 0;
-
-            crc2.save();
-            crc2.translate(_position.x, _position.y);
-
-            crc2.beginPath();
-            crc2.moveTo(0, 0);
-            crc2.lineTo(0, -_max);
-
-            do {
-                x += stepMin + Math.random() * (stepMax - stepMin);
-                let y: number = -_min - Math.random() * (_max - _min);
-
-                crc2.lineTo(x, y);
-            } while (x < crc2.canvas.width);
-
-            crc2.lineTo(x, 0);
-            crc2.closePath();
-
-            let gradient: CanvasGradient = crc2.createLinearGradient(0, 0, 0, -_max);
-            gradient.addColorStop(0, _colorLow);
-            gradient.addColorStop(0.7, _colorHigh);
-
-            crc2.fillStyle = gradient;
-            crc2.fill();
-
-            crc2.restore();
-        }
-
-        function drawTree(_position: Vector, _size: Vector): void {
-            console.log("Tree", _position, _size);
-
-            crc2.fillStyle = "brown";
-            crc2.fillRect(_position.x, _position.y, 20, -100);
-
-
-
-            let nBranches: number = 10;
-            let maxRadius: number = 60;
-            let branch: Path2D = new Path2D();
-            branch.arc(0, 0, maxRadius, 0, 2 * Math.PI);
-            crc2.fillStyle = "darkgreen";
-            crc2.fillRect(_position.x, _position.y, 20, -_size.y);
-
-
-            crc2.save();
-            crc2.translate(_position.x, _position.y);
-
-            do {
-                let y: number = -_size.y - Math.random() * _size.y;
-                let x: number = Math.random() * _size.x;
-                crc2.save();
-                crc2.translate(x, y);
-                crc2.fill(branch);
-                crc2.restore();
-                nBranches -= 1;
-            } while (nBranches > 0);
-
-
-
-            crc2.restore();
-
-
-            crc2.fillStyle = "brown";
-            crc2.fillRect(_position.x, _position.y, 20, -100);
-
-
-
-        }
-
-
-        function drawSnowflake(_position: Vector, _size: Vector): void {
-            console.log("Snowflake", _position, _size);
-
-
-
-            let nParticles: number = 20;
-            let radiusParticle: number = 50;
-            let particle: Path2D = new Path2D();
-            let gradient: CanvasGradient = crc2.createRadialGradient(0, 0, 0, 0, 0, radiusParticle);
-
-            particle.arc(0, 0, radiusParticle, 0, 2 * Math.PI);
-            gradient.addColorStop(0, "HSLA(0, 100%, 100%, 0.5)");
-            gradient.addColorStop(1, "HSLA(0, 100%, 100%, 0)");
-
-            crc2.save();
-            crc2.translate(_position.x, _position.y);
-            crc2.fillStyle = gradient;
-
-            for (let drawn: number = 0; drawn < nParticles; drawn++) {
-                crc2.save();
-
-                let x: number = (Math.random() - 0.5) * _size.x;
-                let y: number = - (Math.random() * _size.y);
-                let pos: Vector = new Vector(x, y);
-                let snowflake: Snowflake = new Snowflake(pos);
-                snowflakes.push(snowflake);
-                snowflake.draw();
-            }
+            let x: number = (Math.random() - 0.5) * _size.x;
+            let y: number = - (Math.random() * _size.y);
+            crc2.translate(x, y);
             crc2.fill(particle);
             crc2.restore();
         }
@@ -221,12 +113,126 @@ namespace A09_2 {
         crc2.restore();
     }
 
+    function drawMountains(_position: Vector, _min: number, _max: number, _colorLow: string, _colorHigh: string): void {
+        console.log("Mountains");
+
+        let stepMin: number = 50;
+        let stepMax: number = 150;
+        let x: number = 0;
+
+        crc2.save();
+        crc2.translate(_position.x, _position.y);
+
+        crc2.beginPath();
+        crc2.moveTo(0, 0);
+        crc2.lineTo(0, -_max);
+
+        do {
+            x += stepMin + Math.random() * (stepMax - stepMin);
+            let y: number = -_min - Math.random() * (_max - _min);
+
+            crc2.lineTo(x, y);
+        } while (x < crc2.canvas.width);
+
+        crc2.lineTo(x, 0);
+        crc2.closePath();
+
+        let gradient: CanvasGradient = crc2.createLinearGradient(0, 0, 0, -_max);
+        gradient.addColorStop(0, _colorLow);
+        gradient.addColorStop(0.7, _colorHigh);
+
+        crc2.fillStyle = gradient;
+        crc2.fill();
+
+        crc2.restore();
+    }
+
+    function drawTree(_position: Vector, _size: Vector): void {
+        console.log("Tree", _position, _size);
+
+        crc2.fillStyle = "brown";
+        crc2.fillRect(_position.x, _position.y, 20, -100);
+
+
+
+        let nBranches: number = 10;
+        let maxRadius: number = 60;
+        let branch: Path2D = new Path2D();
+        branch.arc(0, 0, maxRadius, 0, 2 * Math.PI);
+        crc2.fillStyle = "darkgreen";
+        crc2.fillRect(_position.x, _position.y, 20, -_size.y);
+
+
+        crc2.save();
+        crc2.translate(_position.x, _position.y);
+
+        do {
+            let y: number = -_size.y - Math.random() * _size.y;
+            let x: number = Math.random() * _size.x;
+            crc2.save();
+            crc2.translate(x, y);
+            crc2.fill(branch);
+            crc2.restore();
+            nBranches -= 1;
+        } while (nBranches > 0);
+
+
+
+        crc2.restore();
+
+
+        crc2.fillStyle = "brown";
+        crc2.fillRect(_position.x, _position.y, 20, -100);
+
+
+
+    }
+
+
+    function drawSnowflake(_position: Vector, _size: Vector): void {
+        console.log("Snowflake", _position, _size);
 
 
 
 
+        for (let i: number = 0; i < 500; i++) {
+            crc2.save();
 
 
+            let x: number = Math.random() * crc2.canvas.width;
+            let y: number = Math.random() * crc2.canvas.height;
+            let pos: Vector = new Vector(x, y);
+            let snowflake: Snowflake = new Snowflake(pos);
+            snowflake.draw();
+            snowflakes.push(snowflake);
+
+        }
+
+       
+
+
+
+    }
+
+    
+    function update(): void {
+        console.log("Update");
+
+        crc2.fillRect(0, 80, 30, 0);
+
+        
+
+        for (let snowflake of snowflakes) {
+            snowflake.move(1 / 50);
+            snowflake.draw();
+
+
+        }
+
+        
+    }
+
+    
 
 
     function drawSnowman(_position: Vector, _size: Vector): void {
@@ -605,4 +611,4 @@ namespace A09_2 {
     }
 
 }
-}
+

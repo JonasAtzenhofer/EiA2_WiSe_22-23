@@ -13,6 +13,7 @@ var A09_2;
         if (!canvas)
             return;
         A09_2.crc2 = canvas.getContext("2d");
+        window.setInterval(update, 20);
         drawBackground();
         drawSun(new A09_2.Vector(100, 75));
         drawCloud(new A09_2.Vector(300, 95), new A09_2.Vector(150, 75));
@@ -25,131 +26,126 @@ var A09_2;
         drawTree(new A09_2.Vector(200, 500), new A09_2.Vector(50, 100));
         drawTree(new A09_2.Vector(255, 500), new A09_2.Vector(50, 100));
         drawTree(new A09_2.Vector(300, 500), new A09_2.Vector(50, 100));
-        drawSnowflake(new A09_2.Vector(), new A09_2.Vector());
+        drawSnowflake(new A09_2.Vector(0, 0), new A09_2.Vector(0, 0));
         drawSnowman(new A09_2.Vector(100, 600), new A09_2.Vector(100, 50));
         drawHouse(new A09_2.Vector(250, 600), new A09_2.Vector(50, 100));
         drawBird(new A09_2.Vector(375, 585), new A09_2.Vector(200, 100));
         drawFlyingBird(new A09_2.Vector(375, 585));
-        function drawBackground() {
-            console.log("Background");
-            let gradient = A09_2.crc2.createLinearGradient(0, 0, 0, A09_2.crc2.canvas.height);
-            gradient.addColorStop(0, "darkblue");
-            gradient.addColorStop(0.5, "white");
-            gradient.addColorStop(0.8, "lightgrey");
-            gradient.addColorStop(1, "white");
-            A09_2.crc2.fillStyle = gradient;
-            A09_2.crc2.fillRect(0, 0, A09_2.crc2.canvas.width, A09_2.crc2.canvas.height);
-        }
-        function drawSun(_position) {
-            console.log("Sun", _position);
-            let r1 = 30;
-            let r2 = 100;
-            let gradient = A09_2.crc2.createRadialGradient(0, 0, r1, 0, 0, r2);
-            gradient.addColorStop(0, "HSLA(60, 100%, 90%, 1)");
-            gradient.addColorStop(1, "HSLA(60, 100%, 50%, 0)");
+    }
+    function drawBackground() {
+        console.log("Background");
+        let gradient = A09_2.crc2.createLinearGradient(0, 0, 0, A09_2.crc2.canvas.height);
+        gradient.addColorStop(0, "darkblue");
+        gradient.addColorStop(0.5, "white");
+        gradient.addColorStop(0.8, "lightgrey");
+        gradient.addColorStop(1, "white");
+        A09_2.crc2.fillStyle = gradient;
+        A09_2.crc2.fillRect(0, 0, A09_2.crc2.canvas.width, A09_2.crc2.canvas.height);
+    }
+    function drawSun(_position) {
+        console.log("Sun", _position);
+        let r1 = 30;
+        let r2 = 100;
+        let gradient = A09_2.crc2.createRadialGradient(0, 0, r1, 0, 0, r2);
+        gradient.addColorStop(0, "HSLA(60, 100%, 90%, 1)");
+        gradient.addColorStop(1, "HSLA(60, 100%, 50%, 0)");
+        A09_2.crc2.save();
+        A09_2.crc2.translate(_position.x, _position.y);
+        A09_2.crc2.fillStyle = gradient;
+        A09_2.crc2.arc(0, 0, r2, 0, 2 * Math.PI);
+        A09_2.crc2.fill();
+        A09_2.crc2.restore();
+    }
+    function drawCloud(_position, _size) {
+        console.log("Cloud", _position, _size);
+        let nParticles = 20;
+        let radiusParticle = 50;
+        let particle = new Path2D();
+        let gradient = A09_2.crc2.createRadialGradient(0, 0, 0, 0, 0, radiusParticle);
+        particle.arc(0, 0, radiusParticle, 0, 2 * Math.PI);
+        gradient.addColorStop(0, "HSLA(0, 100%, 100%, 0.5)");
+        gradient.addColorStop(1, "HSLA(0, 100%, 100%, 0)");
+        A09_2.crc2.save();
+        A09_2.crc2.translate(_position.x, _position.y);
+        A09_2.crc2.fillStyle = gradient;
+        for (let drawn = 0; drawn < nParticles; drawn++) {
             A09_2.crc2.save();
-            A09_2.crc2.translate(_position.x, _position.y);
-            A09_2.crc2.fillStyle = gradient;
-            A09_2.crc2.arc(0, 0, r2, 0, 2 * Math.PI);
-            A09_2.crc2.fill();
-            A09_2.crc2.restore();
-        }
-        function drawCloud(_position, _size) {
-            console.log("Cloud", _position, _size);
-            let nParticles = 20;
-            let radiusParticle = 50;
-            let particle = new Path2D();
-            let gradient = A09_2.crc2.createRadialGradient(0, 0, 0, 0, 0, radiusParticle);
-            particle.arc(0, 0, radiusParticle, 0, 2 * Math.PI);
-            gradient.addColorStop(0, "HSLA(0, 100%, 100%, 0.5)");
-            gradient.addColorStop(1, "HSLA(0, 100%, 100%, 0)");
-            A09_2.crc2.save();
-            A09_2.crc2.translate(_position.x, _position.y);
-            A09_2.crc2.fillStyle = gradient;
-            for (let drawn = 0; drawn < nParticles; drawn++) {
-                A09_2.crc2.save();
-                let x = (Math.random() - 0.5) * _size.x;
-                let y = -(Math.random() * _size.y);
-                A09_2.crc2.translate(x, y);
-                A09_2.crc2.fill(particle);
-                A09_2.crc2.restore();
-            }
-            A09_2.crc2.restore();
-        }
-        function drawMountains(_position, _min, _max, _colorLow, _colorHigh) {
-            console.log("Mountains");
-            let stepMin = 50;
-            let stepMax = 150;
-            let x = 0;
-            A09_2.crc2.save();
-            A09_2.crc2.translate(_position.x, _position.y);
-            A09_2.crc2.beginPath();
-            A09_2.crc2.moveTo(0, 0);
-            A09_2.crc2.lineTo(0, -_max);
-            do {
-                x += stepMin + Math.random() * (stepMax - stepMin);
-                let y = -_min - Math.random() * (_max - _min);
-                A09_2.crc2.lineTo(x, y);
-            } while (x < A09_2.crc2.canvas.width);
-            A09_2.crc2.lineTo(x, 0);
-            A09_2.crc2.closePath();
-            let gradient = A09_2.crc2.createLinearGradient(0, 0, 0, -_max);
-            gradient.addColorStop(0, _colorLow);
-            gradient.addColorStop(0.7, _colorHigh);
-            A09_2.crc2.fillStyle = gradient;
-            A09_2.crc2.fill();
-            A09_2.crc2.restore();
-        }
-        function drawTree(_position, _size) {
-            console.log("Tree", _position, _size);
-            A09_2.crc2.fillStyle = "brown";
-            A09_2.crc2.fillRect(_position.x, _position.y, 20, -100);
-            let nBranches = 10;
-            let maxRadius = 60;
-            let branch = new Path2D();
-            branch.arc(0, 0, maxRadius, 0, 2 * Math.PI);
-            A09_2.crc2.fillStyle = "darkgreen";
-            A09_2.crc2.fillRect(_position.x, _position.y, 20, -_size.y);
-            A09_2.crc2.save();
-            A09_2.crc2.translate(_position.x, _position.y);
-            do {
-                let y = -_size.y - Math.random() * _size.y;
-                let x = Math.random() * _size.x;
-                A09_2.crc2.save();
-                A09_2.crc2.translate(x, y);
-                A09_2.crc2.fill(branch);
-                A09_2.crc2.restore();
-                nBranches -= 1;
-            } while (nBranches > 0);
-            A09_2.crc2.restore();
-            A09_2.crc2.fillStyle = "brown";
-            A09_2.crc2.fillRect(_position.x, _position.y, 20, -100);
-        }
-        function drawSnowflake(_position, _size) {
-            console.log("Snowflake", _position, _size);
-            let nParticles = 20;
-            let radiusParticle = 50;
-            let particle = new Path2D();
-            let gradient = A09_2.crc2.createRadialGradient(0, 0, 0, 0, 0, radiusParticle);
-            particle.arc(0, 0, radiusParticle, 0, 2 * Math.PI);
-            gradient.addColorStop(0, "HSLA(0, 100%, 100%, 0.5)");
-            gradient.addColorStop(1, "HSLA(0, 100%, 100%, 0)");
-            A09_2.crc2.save();
-            A09_2.crc2.translate(_position.x, _position.y);
-            A09_2.crc2.fillStyle = gradient;
-            for (let drawn = 0; drawn < nParticles; drawn++) {
-                A09_2.crc2.save();
-                let x = (Math.random() - 0.5) * _size.x;
-                let y = -(Math.random() * _size.y);
-                let pos = new A09_2.Vector(x, y);
-                let snowflake = new A09_2.Snowflake(pos);
-                snowflakes.push(snowflake);
-                snowflake.draw();
-            }
+            let x = (Math.random() - 0.5) * _size.x;
+            let y = -(Math.random() * _size.y);
+            A09_2.crc2.translate(x, y);
             A09_2.crc2.fill(particle);
             A09_2.crc2.restore();
         }
         A09_2.crc2.restore();
+    }
+    function drawMountains(_position, _min, _max, _colorLow, _colorHigh) {
+        console.log("Mountains");
+        let stepMin = 50;
+        let stepMax = 150;
+        let x = 0;
+        A09_2.crc2.save();
+        A09_2.crc2.translate(_position.x, _position.y);
+        A09_2.crc2.beginPath();
+        A09_2.crc2.moveTo(0, 0);
+        A09_2.crc2.lineTo(0, -_max);
+        do {
+            x += stepMin + Math.random() * (stepMax - stepMin);
+            let y = -_min - Math.random() * (_max - _min);
+            A09_2.crc2.lineTo(x, y);
+        } while (x < A09_2.crc2.canvas.width);
+        A09_2.crc2.lineTo(x, 0);
+        A09_2.crc2.closePath();
+        let gradient = A09_2.crc2.createLinearGradient(0, 0, 0, -_max);
+        gradient.addColorStop(0, _colorLow);
+        gradient.addColorStop(0.7, _colorHigh);
+        A09_2.crc2.fillStyle = gradient;
+        A09_2.crc2.fill();
+        A09_2.crc2.restore();
+    }
+    function drawTree(_position, _size) {
+        console.log("Tree", _position, _size);
+        A09_2.crc2.fillStyle = "brown";
+        A09_2.crc2.fillRect(_position.x, _position.y, 20, -100);
+        let nBranches = 10;
+        let maxRadius = 60;
+        let branch = new Path2D();
+        branch.arc(0, 0, maxRadius, 0, 2 * Math.PI);
+        A09_2.crc2.fillStyle = "darkgreen";
+        A09_2.crc2.fillRect(_position.x, _position.y, 20, -_size.y);
+        A09_2.crc2.save();
+        A09_2.crc2.translate(_position.x, _position.y);
+        do {
+            let y = -_size.y - Math.random() * _size.y;
+            let x = Math.random() * _size.x;
+            A09_2.crc2.save();
+            A09_2.crc2.translate(x, y);
+            A09_2.crc2.fill(branch);
+            A09_2.crc2.restore();
+            nBranches -= 1;
+        } while (nBranches > 0);
+        A09_2.crc2.restore();
+        A09_2.crc2.fillStyle = "brown";
+        A09_2.crc2.fillRect(_position.x, _position.y, 20, -100);
+    }
+    function drawSnowflake(_position, _size) {
+        console.log("Snowflake", _position, _size);
+        for (let i = 0; i < 500; i++) {
+            A09_2.crc2.save();
+            let x = Math.random() * A09_2.crc2.canvas.width;
+            let y = Math.random() * A09_2.crc2.canvas.height;
+            let pos = new A09_2.Vector(x, y);
+            let snowflake = new A09_2.Snowflake(pos);
+            snowflake.draw();
+            snowflakes.push(snowflake);
+        }
+    }
+    function update() {
+        console.log("Update");
+        A09_2.crc2.fillRect(0, 80, 30, 0);
+        for (let snowflake of snowflakes) {
+            snowflake.move(1 / 50);
+            snowflake.draw();
+        }
     }
     function drawSnowman(_position, _size) {
         console.log("Snowman", _position, _size);
