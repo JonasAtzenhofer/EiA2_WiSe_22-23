@@ -4,32 +4,43 @@ var A09_2;
         position;
         velocity;
         size;
-        constructor(_position) {
-            console.log("Snowflake constructor");
-            let x = 800 * Math.random();
-            let y = 600 * Math.random();
-            this.position = new A09_2.Vector(x, y);
-            this.velocity = new A09_2.Vector(0, 20);
+        snowflake;
+        gradient;
+        constructor(_size, _position) {
+            if (_position)
+                this.position = _position;
+            else
+                this.position = new A09_2.Vector(0, 0);
+            this.velocity = new A09_2.Vector(0, 0);
+            this.velocity.random(50, 150);
+            this.size = _size;
         }
-        move(_timeslice) {
-            let offset = new A09_2.Vector(this.velocity.x, this.velocity.y);
-            offset.scale(_timeslice);
-            this.position.add(offset);
-            if (this.position.y < 0) {
-                this.position.y += A09_2.crc2.canvas.height;
-            }
-            if (this.position.y > A09_2.crc2.canvas.height) {
-                this.position.y -= A09_2.crc2.canvas.height;
+        create(_xStep) {
+            this.snowflake = new Path2D();
+            this.gradient = A09_2.crc2.createRadialGradient(0, 0, 0, 0, 0, 10);
+            this.snowflake.arc(0, 0, 10, 0, 2 * Math.PI);
+            this.gradient.addColorStop(0, "hsla(0, 100%, 100%, 1)");
+            this.gradient.addColorStop(1, "hsla(0, 100%, 100%, 0)");
+            A09_2.crc2.fillStyle = this.gradient;
+            if (_xStep) {
+                this.position.x = this.position.x + _xStep;
             }
         }
         draw() {
-            console.log("Snowflake draw");
-            A09_2.crc2.beginPath();
-            let radiusSnowflake = Math.random() * 3 + 1;
-            A09_2.crc2.beginPath();
-            A09_2.crc2.arc(this.position.x, this.position.y, radiusSnowflake, 0, 2 * Math.PI);
-            A09_2.crc2.fillStyle = "white";
-            A09_2.crc2.fill();
+            A09_2.crc2.save();
+            A09_2.crc2.translate(this.position.x, this.position.y);
+            A09_2.crc2.scale(this.size, this.size);
+            A09_2.crc2.fill(this.snowflake);
+            A09_2.crc2.restore();
+        }
+        move(_step) {
+            let offset = new A09_2.Vector(0, this.velocity.y);
+            offset.scale(_step);
+            this.position.add(offset);
+            if (this.position.y > 677) {
+                this.position.y = 0;
+            }
+            this.draw();
         }
     }
     A09_2.Snowflake = Snowflake;

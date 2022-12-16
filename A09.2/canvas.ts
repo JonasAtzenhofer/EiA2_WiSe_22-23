@@ -2,8 +2,8 @@
 //Matrikelnummer: 271026
 //Quellen: https://www.w3schools.com/graphics/canvas_gradients.asp
 //  https://www.youtube.com/watch?v=n7kFRru_d2A
-// LO8 Videos
-// Vogelhaus inspiriert von Arthur Aguiar
+// LO8 +L09  Videos
+
 
 
 
@@ -15,19 +15,25 @@ namespace A09_2 {
 
 
     export let crc2: CanvasRenderingContext2D;
+    
+
+    
 
     let snowflakes: Snowflake[] = [];
+    let background: ImageData;
+    let xStep: number = 0;
+
+
+    
+    
 
     function handleLoad(_event: Event): void {
 
-        let canvas: HTMLCanvasElement = <HTMLCanvasElement>document.querySelector("canvas");
+        let canvas: HTMLCanvasElement | null = <HTMLCanvasElement>document.querySelector("canvas");
         if (!canvas)
             return;
         crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
 
-
-        
-        window.setInterval(update, 20);
 
 
         drawBackground();
@@ -42,11 +48,17 @@ namespace A09_2 {
         drawTree(new Vector(200, 500), new Vector(50, 100));
         drawTree(new Vector(255, 500), new Vector(50, 100));
         drawTree(new Vector(300, 500), new Vector(50, 100));
-        drawSnowflake(new Vector(0, 0), new Vector(0, 0));
         drawSnowman(new Vector(100, 600), new Vector(100, 50));
         drawHouse(new Vector(250, 600), new Vector(50, 100));
         drawBird(new Vector(375, 585), new Vector(200, 100));
         drawFlyingBird(new Vector(375, 585));
+        drawTestSnowflake();
+        setInterval(update, 20);
+
+        
+        
+
+        
 
     }
 
@@ -189,47 +201,24 @@ namespace A09_2 {
     }
 
 
-    function drawSnowflake(_position: Vector, _size: Vector): void {
-        console.log("Snowflake", _position, _size);
-
-
-
-
-        for (let i: number = 0; i < 500; i++) {
-            crc2.save();
-
-
-            let x: number = Math.random() * crc2.canvas.width;
-            let y: number = Math.random() * crc2.canvas.height;
-            let pos: Vector = new Vector(x, y);
-            let snowflake: Snowflake = new Snowflake(pos);
-            snowflake.draw();
-            snowflakes.push(snowflake);
-
+    function drawTestSnowflake(): void {
+        for (let index: number = 0; index < 175; index++) {
+            xStep = xStep + 5; 
+            let snowflake: Snowflake = new Snowflake(1); 
+            snowflake.create(xStep); 
+            snowflakes.push(snowflake); 
         }
-
-       
-
-
-
     }
 
     
     function update(): void {
-        console.log("Update");
-
-        crc2.fillRect(0, 80, 30, 0);
-
-        
-
+        crc2.putImageData(background, 0, 0);
+        crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height);
         for (let snowflake of snowflakes) {
             snowflake.move(1 / 50);
             snowflake.draw();
-
-
+            console.log("Hallo"); 
         }
-
-        
     }
 
     

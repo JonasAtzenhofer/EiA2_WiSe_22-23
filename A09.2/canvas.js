@@ -2,18 +2,18 @@
 //Matrikelnummer: 271026
 //Quellen: https://www.w3schools.com/graphics/canvas_gradients.asp
 //  https://www.youtube.com/watch?v=n7kFRru_d2A
-// LO8 Videos
-// Vogelhaus inspiriert von Arthur Aguiar
+// LO8 +L09  Videos
 var A09_2;
 (function (A09_2) {
     window.addEventListener("load", handleLoad);
     let snowflakes = [];
+    let background;
+    let xStep = 0;
     function handleLoad(_event) {
         let canvas = document.querySelector("canvas");
         if (!canvas)
             return;
         A09_2.crc2 = canvas.getContext("2d");
-        window.setInterval(update, 20);
         drawBackground();
         drawSun(new A09_2.Vector(100, 75));
         drawCloud(new A09_2.Vector(300, 95), new A09_2.Vector(150, 75));
@@ -26,11 +26,12 @@ var A09_2;
         drawTree(new A09_2.Vector(200, 500), new A09_2.Vector(50, 100));
         drawTree(new A09_2.Vector(255, 500), new A09_2.Vector(50, 100));
         drawTree(new A09_2.Vector(300, 500), new A09_2.Vector(50, 100));
-        drawSnowflake(new A09_2.Vector(0, 0), new A09_2.Vector(0, 0));
         drawSnowman(new A09_2.Vector(100, 600), new A09_2.Vector(100, 50));
         drawHouse(new A09_2.Vector(250, 600), new A09_2.Vector(50, 100));
         drawBird(new A09_2.Vector(375, 585), new A09_2.Vector(200, 100));
         drawFlyingBird(new A09_2.Vector(375, 585));
+        drawTestSnowflake();
+        setInterval(update, 20);
     }
     function drawBackground() {
         console.log("Background");
@@ -127,24 +128,21 @@ var A09_2;
         A09_2.crc2.fillStyle = "brown";
         A09_2.crc2.fillRect(_position.x, _position.y, 20, -100);
     }
-    function drawSnowflake(_position, _size) {
-        console.log("Snowflake", _position, _size);
-        for (let i = 0; i < 500; i++) {
-            A09_2.crc2.save();
-            let x = Math.random() * A09_2.crc2.canvas.width;
-            let y = Math.random() * A09_2.crc2.canvas.height;
-            let pos = new A09_2.Vector(x, y);
-            let snowflake = new A09_2.Snowflake(pos);
-            snowflake.draw();
+    function drawTestSnowflake() {
+        for (let index = 0; index < 175; index++) {
+            xStep = xStep + 5;
+            let snowflake = new A09_2.Snowflake(1);
+            snowflake.create(xStep);
             snowflakes.push(snowflake);
         }
     }
     function update() {
-        console.log("Update");
-        A09_2.crc2.fillRect(0, 80, 30, 0);
+        A09_2.crc2.putImageData(background, 0, 0);
+        A09_2.crc2.fillRect(0, 0, A09_2.crc2.canvas.width, A09_2.crc2.canvas.height);
         for (let snowflake of snowflakes) {
             snowflake.move(1 / 50);
             snowflake.draw();
+            console.log("Hallo");
         }
     }
     function drawSnowman(_position, _size) {
