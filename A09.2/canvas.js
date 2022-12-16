@@ -129,18 +129,19 @@ var A09_2;
         A09_2.crc2.fillRect(_position.x, _position.y, 20, -100);
     }
     function drawTestSnowflake() {
-        for (let index = 0; index < 175; index++) {
-            xStep = xStep + 5;
+        for (let index = 0; index < 375; index++) {
+            xStep = xStep + 2;
             let snowflake = new A09_2.Snowflake(1);
             snowflake.create(xStep);
             snowflakes.push(snowflake);
+            background = A09_2.crc2.getImageData(0, 0, A09_2.crc2.canvas.width, A09_2.crc2.canvas.height);
         }
     }
     function update() {
         A09_2.crc2.putImageData(background, 0, 0);
         A09_2.crc2.fillRect(0, 0, A09_2.crc2.canvas.width, A09_2.crc2.canvas.height);
         for (let snowflake of snowflakes) {
-            snowflake.move(1 / 50);
+            snowflake.move(1 / 30);
             snowflake.draw();
             console.log("Hallo");
         }

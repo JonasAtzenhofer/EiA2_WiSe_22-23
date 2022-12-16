@@ -75,6 +75,7 @@ namespace A09_2 {
 
         crc2.fillStyle = gradient;
         crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height);
+        
     }
 
     function drawSun(_position: Vector): void {
@@ -202,11 +203,12 @@ namespace A09_2 {
 
 
     function drawTestSnowflake(): void {
-        for (let index: number = 0; index < 175; index++) {
-            xStep = xStep + 5; 
+        for (let index: number = 0; index < 375; index++) {
+            xStep = xStep + 2; 
             let snowflake: Snowflake = new Snowflake(1); 
             snowflake.create(xStep); 
             snowflakes.push(snowflake); 
+            background = crc2.getImageData(0, 0, crc2.canvas.width, crc2.canvas.height);
         }
     }
 
@@ -215,7 +217,7 @@ namespace A09_2 {
         crc2.putImageData(background, 0, 0);
         crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height);
         for (let snowflake of snowflakes) {
-            snowflake.move(1 / 50);
+            snowflake.move(1 / 30);
             snowflake.draw();
             console.log("Hallo"); 
         }
