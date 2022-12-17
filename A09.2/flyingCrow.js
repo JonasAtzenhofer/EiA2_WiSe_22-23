@@ -26,10 +26,14 @@ var A09_2;
             let offset = new A09_2.Vector(this.velocity.x, this.velocity.y);
             offset.scale(_timeslice);
             this.position.add(offset);
-            if (this.position.x > A09_2.crc2.canvas.width)
-                this.position.x -= A09_2.crc2.canvas.width;
             if (this.position.x < 0)
                 this.position.x += A09_2.crc2.canvas.width;
+            if (this.position.y < 0)
+                this.position.y += A09_2.crc2.canvas.height;
+            if (this.position.x > A09_2.crc2.canvas.width)
+                this.position.x -= A09_2.crc2.canvas.width;
+            if (this.position.y > A09_2.crc2.canvas.height)
+                this.position.y -= A09_2.crc2.canvas.height;
         }
     }
     A09_2.FlyingCrows = FlyingCrows;

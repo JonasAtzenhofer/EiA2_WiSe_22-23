@@ -11,6 +11,9 @@
 
 
 namespace A09_2 {
+    
+    
+    
     window.addEventListener("load", handleLoad);
 
 
@@ -27,8 +30,9 @@ namespace A09_2 {
     let background: ImageData;
     let xStep: number = 0;
 
-
     
+
+   
     
 
     function handleLoad(_event: Event): void {
@@ -58,8 +62,9 @@ namespace A09_2 {
         drawBirds(20);
         drawTestSnowflake();
         setInterval(update, 20);
+        setInterval(updateBird, 400);
         setInterval(updateFlyingBirds, 500);
-        setInterval(updateSittingBirds, 500);
+        //setInterval(updateSittingBirds, 500);
         //setInterval(updateFlyingCrows, 500);
 
         
@@ -308,6 +313,10 @@ namespace A09_2 {
         }
     }
 
+    function updateBird(): void {
+        updateSittingBirds(true);
+    }
+
     function updateFlyingBirds(): void {
         for (let bird of flyingBirds) {
             crc2.save();
@@ -326,7 +335,7 @@ namespace A09_2 {
             crc2.restore();
 
             if (_update) {
-                bird.eat(1 / 50);
+                bird.eat(0 / 150);
             }
         }
     }

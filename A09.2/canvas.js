@@ -36,8 +36,9 @@ var A09_2;
         drawBirds(20);
         drawTestSnowflake();
         setInterval(update, 20);
+        setInterval(updateBird, 400);
         setInterval(updateFlyingBirds, 500);
-        setInterval(updateSittingBirds, 500);
+        //setInterval(updateSittingBirds, 500);
         //setInterval(updateFlyingCrows, 500);
     }
     function drawBackground() {
@@ -206,6 +207,9 @@ var A09_2;
             console.log("Hallo");
         }
     }
+    function updateBird() {
+        updateSittingBirds(true);
+    }
     function updateFlyingBirds() {
         for (let bird of flyingBirds) {
             A09_2.crc2.save();
@@ -220,7 +224,7 @@ var A09_2;
             bird.draw();
             A09_2.crc2.restore();
             if (_update) {
-                bird.eat(1 / 50);
+                bird.eat(0 / 150);
             }
         }
     }
