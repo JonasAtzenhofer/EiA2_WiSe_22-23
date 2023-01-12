@@ -21,7 +21,7 @@ namespace A09_2 {
     export let crc2: CanvasRenderingContext2D;
     
 
-    
+
 
     let snowflakes: Snowflake[] = [];
     let flyingBirds: FlyingBird[] = [];
