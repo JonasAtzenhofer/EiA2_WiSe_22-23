@@ -3,6 +3,7 @@ namespace A010_2 {
         size: number;
         declare position: Vector;
         declare velocity: Vector;
+        
         snowflake: Path2D;
         gradient: CanvasGradient;
 

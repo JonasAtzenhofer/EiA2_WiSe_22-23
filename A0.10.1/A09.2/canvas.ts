@@ -1,9 +1,6 @@
 //Jonas Atzenhofer L08.2
 //Matrikelnummer: 271026
-//Quellen: https://www.w3schools.com/graphics/canvas_gradients.asp
-//  https://www.youtube.com/watch?v=n7kFRru_d2A
-// LO8 +L09  Videos
-// Yannick König, Natan Haider 
+
 
 
 
