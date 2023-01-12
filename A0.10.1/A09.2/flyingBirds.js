@@ -1,13 +1,10 @@
 var A010_2;
 (function (A010_2) {
     class FlyingBird extends A010_2.Moveable {
-        position;
-        velocity;
         scale;
         constructor(_position) {
-            this.position = _position;
-            this.velocity = new A010_2.Vector(0, 0);
-            this.velocity.random(50, 200);
+            super();
+            this.velocity = new A010_2.Vector(100, 0);
             this.scale = new A010_2.Vector(0, 0);
             this.scale.set(this.position.y / 225, this.position.y / 225);
         }

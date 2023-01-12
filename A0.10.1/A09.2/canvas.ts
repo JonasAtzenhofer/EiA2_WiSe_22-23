@@ -22,13 +22,10 @@ namespace A010_2 {
     
 
 
-    let m: Moveable = new Moveable();
+
     let moveables: Moveable[] = [];
 
-    let snowflakes: Snowflake[] = [];
-    let flyingBirds: FlyingBird[] = [];
-    let sittingBirds: SitBird[] = [];
-    let flyingCrows: FlyingCrows[] = [];
+
     let background: ImageData;
     let xStep: number = 0;
 
@@ -64,8 +61,8 @@ namespace A010_2 {
         drawBirds(20);
         drawTestSnowflake();
         setInterval(update, 20);
-        setInterval(updateBird, 400);
-        setInterval(updateFlyingBirds, 500);
+        //setInterval(updateBird, 400);
+        //setInterval(updateFlyingBirds, 500);
         //setInterval(updateSittingBirds, 500);
         //setInterval(updateFlyingCrows, 500);
 
@@ -242,8 +239,7 @@ namespace A010_2 {
 
 
             let sittingBird: SitBird = new SitBird(birdPos, color[randomColor], beakColor[randomBeakColor]);
-            sittingBirds.push(sittingBird);
-            sittingBird.draw();
+            moveables.push(sittingBird);
             crc2.restore();
 
         }
@@ -261,8 +257,7 @@ namespace A010_2 {
             let birdPos: Vector = new Vector(x, y);
 
             let flyingBird: FlyingBird = new FlyingBird(birdPos);
-            flyingBirds.push(flyingBird);
-            flyingBird.draw();
+            moveables.push(flyingBird);
 
             crc2.restore();
 
@@ -280,9 +275,8 @@ namespace A010_2 {
             let y: number = randomBetween(minHeight, maxHeight);
             let birdPos: Vector = new Vector(x, y);
 
-            let flyingCrow: FlyingCrows = new FlyingCrows(birdPos);
-            flyingCrows.push(flyingCrow);
-            flyingCrow.draw();
+            let flyingCrow: FlyingCrows = new FlyingCrows(birdPos, birdPos );
+            moveables.push(flyingCrow);
 
             crc2.restore();
 
@@ -294,8 +288,7 @@ namespace A010_2 {
         for (let index: number = 0; index < 375; index++) {
             xStep = xStep + 2; 
             let snowflake: Snowflake = new Snowflake(1); 
-            snowflake.create(xStep); 
-            snowflakes.push(snowflake); 
+            moveables.push(snowflake); 
             background = crc2.getImageData(0, 0, crc2.canvas.width, crc2.canvas.height);
         }
     }
@@ -304,55 +297,16 @@ namespace A010_2 {
     function update(): void {
         crc2.putImageData(background, 0, 0);
         crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height);
-        updateFlyingBirds();
-        updateFlyingCrows();
-        updateSittingBirds(false);
         
-        for (let snowflake of snowflakes) {
-            snowflake.move(1 / 30);
-            snowflake.draw();
-            console.log("Hallo"); 
+        for (let moveable of moveables) {
+            moveable.move(1 / 30);
+            moveable.draw();
         }
+
     }
 
-    function updateBird(): void {
-        updateSittingBirds(true);
-    }
+   
 
-    function updateFlyingBirds(): void {
-        for (let bird of flyingBirds) {
-            crc2.save();
-
-            bird.move(1 / 50);
-            bird.draw();
-            crc2.restore();
-        }
-    }
-
-    function updateSittingBirds(_update: boolean): void {
-        for (let bird of sittingBirds) {
-            crc2.save();
-
-            bird.draw();
-            crc2.restore();
-
-            if (_update) {
-                bird.move(0 / 150);
-            }
-        }
-    }
-
-    function updateFlyingCrows(): void {
-        for (let crow of flyingCrows) {
-            crc2.save();
-
-            crow.move(1 / 50);
-            crow.draw();
-            crc2.restore();
-        }
-    }
-
-    
 
 
     function drawSnowman(_position: Vector, _size: Vector): void {

@@ -1,20 +1,19 @@
 var A010_2;
 (function (A010_2) {
-    class SitBird {
-        position;
-        velocity;
+    class SitBird extends A010_2.Moveable {
         color;
         beakColor;
         scale;
         eating;
         constructor(_position, _color, _beakColor) {
+            super();
             this.position = _position;
             this.color = _color;
             this.beakColor = _beakColor;
             this.scale = new A010_2.Vector(0, 0);
             this.scale.set(this.position.y / 500, this.position.y / 500);
             this.velocity = new A010_2.Vector(0, 0);
-            this.velocity.random(50, 100, A010_2.directions[Math.floor(Math.random() * A010_2.directions.length)]);
+            this.velocity.random(50, 100);
             let values = [true, false];
             this.eating = values[Math.floor(Math.random() * values.length)];
         }

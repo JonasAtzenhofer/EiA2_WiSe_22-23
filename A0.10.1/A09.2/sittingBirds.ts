@@ -1,20 +1,19 @@
 namespace A010_2 {
-    export class SitBird {
-        position: Vector;
-        velocity: Vector;
+    export class SitBird extends Moveable {
         color: BirdColor;
         beakColor: string;
         scale: Vector;
         eating: boolean;
 
         constructor(_position: Vector, _color: BirdColor, _beakColor: string) {
+            super();
             this.position = _position;
             this.color = _color;
             this.beakColor = _beakColor;
             this.scale = new Vector(0, 0);
             this.scale.set(this.position.y / 500, this.position.y / 500);
             this.velocity = new Vector(0, 0);
-            this.velocity.random(50, 100, directions[Math.floor(Math.random() * directions.length)]);
+            this.velocity.random(50, 100);
             
 
             let values: boolean[] = [true, false];

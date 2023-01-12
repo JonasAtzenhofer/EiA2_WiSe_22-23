@@ -7,12 +7,7 @@
 var A010_2;
 (function (A010_2) {
     window.addEventListener("load", handleLoad);
-    let m = new A010_2.Moveable();
     let moveables = [];
-    let snowflakes = [];
-    let flyingBirds = [];
-    let sittingBirds = [];
-    let flyingCrows = [];
     let background;
     let xStep = 0;
     function handleLoad(_event) {
@@ -38,8 +33,8 @@ var A010_2;
         drawBirds(20);
         drawTestSnowflake();
         setInterval(update, 20);
-        setInterval(updateBird, 400);
-        setInterval(updateFlyingBirds, 500);
+        //setInterval(updateBird, 400);
+        //setInterval(updateFlyingBirds, 500);
         //setInterval(updateSittingBirds, 500);
         //setInterval(updateFlyingCrows, 500);
     }
@@ -155,8 +150,7 @@ var A010_2;
             let y = randomBetween(minHeight, maxHeight);
             let birdPos = new A010_2.Vector(x, y);
             let sittingBird = new A010_2.SitBird(birdPos, A010_2.color[randomColor], A010_2.beakColor[randomBeakColor]);
-            sittingBirds.push(sittingBird);
-            sittingBird.draw();
+            moveables.push(sittingBird);
             A010_2.crc2.restore();
         }
         for (let drawn = 0; drawn < nFlying; drawn++) {
@@ -169,8 +163,7 @@ var A010_2;
             let y = randomBetween(minHeight, maxHeight);
             let birdPos = new A010_2.Vector(x, y);
             let flyingBird = new A010_2.FlyingBird(birdPos);
-            flyingBirds.push(flyingBird);
-            flyingBird.draw();
+            moveables.push(flyingBird);
             A010_2.crc2.restore();
         }
         for (let drawn = 0; drawn < nCrow; drawn++) {
@@ -182,9 +175,8 @@ var A010_2;
             let x = randomBetween(minWidth, maxWidth);
             let y = randomBetween(minHeight, maxHeight);
             let birdPos = new A010_2.Vector(x, y);
-            let flyingCrow = new A010_2.FlyingCrows(birdPos);
-            flyingCrows.push(flyingCrow);
-            flyingCrow.draw();
+            let flyingCrow = new A010_2.FlyingCrows(birdPos, birdPos);
+            moveables.push(flyingCrow);
             A010_2.crc2.restore();
         }
     }
@@ -192,50 +184,16 @@ var A010_2;
         for (let index = 0; index < 375; index++) {
             xStep = xStep + 2;
             let snowflake = new A010_2.Snowflake(1);
-            snowflake.create(xStep);
-            snowflakes.push(snowflake);
+            moveables.push(snowflake);
             background = A010_2.crc2.getImageData(0, 0, A010_2.crc2.canvas.width, A010_2.crc2.canvas.height);
         }
     }
     function update() {
         A010_2.crc2.putImageData(background, 0, 0);
         A010_2.crc2.fillRect(0, 0, A010_2.crc2.canvas.width, A010_2.crc2.canvas.height);
-        updateFlyingBirds();
-        updateFlyingCrows();
-        updateSittingBirds(false);
-        for (let snowflake of snowflakes) {
-            snowflake.move(1 / 30);
-            snowflake.draw();
-            console.log("Hallo");
-        }
-    }
-    function updateBird() {
-        updateSittingBirds(true);
-    }
-    function updateFlyingBirds() {
-        for (let bird of flyingBirds) {
-            A010_2.crc2.save();
-            bird.move(1 / 50);
-            bird.draw();
-            A010_2.crc2.restore();
-        }
-    }
-    function updateSittingBirds(_update) {
-        for (let bird of sittingBirds) {
-            A010_2.crc2.save();
-            bird.draw();
-            A010_2.crc2.restore();
-            if (_update) {
-                bird.move(0 / 150);
-            }
-        }
-    }
-    function updateFlyingCrows() {
-        for (let crow of flyingCrows) {
-            A010_2.crc2.save();
-            crow.move(1 / 50);
-            crow.draw();
-            A010_2.crc2.restore();
+        for (let moveable of moveables) {
+            moveable.move(1 / 30);
+            moveable.draw();
         }
     }
     function drawSnowman(_position, _size) {

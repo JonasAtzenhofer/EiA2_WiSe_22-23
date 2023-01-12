@@ -1,16 +1,12 @@
 namespace A010_2 {
-    export class FlyingCrows {
-        position: Vector;
-        velocity: Vector;
+    export class FlyingCrows extends Moveable {
+        
         scale: Vector;
 
-        constructor(_position: Vector) {
-            this.position = _position;
-            this.velocity = new Vector(0, 0);
-            this.velocity.random(50, 200);
-
-            this.scale = new Vector(0, 0);
-            this.scale.set(this.position.y / 225, this.position.y / 225);
+        constructor(_position: Vector, _velocity: Vector) {
+            super(_position);
+           
+            this.velocity = _velocity.copy();
         }
 
         draw(): void {
@@ -31,6 +27,7 @@ namespace A010_2 {
 
 
         move(_timeslice: number): void {
+            super.move(_timeslice);
             let offset: Vector = new Vector(this.velocity.x, this.velocity.y);
             offset.scale(_timeslice);
             this.position.add(offset);

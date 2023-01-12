@@ -1,14 +1,15 @@
 namespace A010_2 {
-    export class Snowflake {
-        position: Vector;
-        velocity: Vector;
+    export class Snowflake extends Moveable {
         size: number;
+        declare position: Vector;
+        declare velocity: Vector;
         snowflake: Path2D;
         gradient: CanvasGradient;
 
     constructor(_size: number, _position?: Vector) {
+        super(_position);
         if (_position)
-            this.position = _position;
+            this.position = _position.copy();
         else
             this.position = new Vector(0, 0);
             
@@ -17,7 +18,7 @@ namespace A010_2 {
         this.size = _size;
     }
 
-    create(_xStep?: number): void {
+    draw(): void {
         this.snowflake = new Path2D();
         this.gradient = crc2.createRadialGradient(0, 0, 0, 0, 0, 10);
 
@@ -25,13 +26,14 @@ namespace A010_2 {
         this.gradient.addColorStop(0, "hsla(0, 100%, 100%, 1)");
         this.gradient.addColorStop(1, "hsla(0, 100%, 100%, 0)");
         crc2.fillStyle = this.gradient; 
+        let _xStep: number = 5;
         if (_xStep) {
             this.position.x = this.position.x + _xStep; 
         }
-    }
+    
 
 
-    draw(): void {
+    
         crc2.save();
         crc2.translate(this.position.x, this.position.y);
         crc2.scale(this.size, this.size);

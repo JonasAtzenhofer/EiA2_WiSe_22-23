@@ -1,14 +1,11 @@
 namespace A010_2 {
-    export class FlyingBird extends Moveable{
-        position: Vector;
-        velocity: Vector;
+    export class FlyingBird extends Moveable {
+
         scale: Vector;
 
         constructor(_position: Vector) {
-            this.position = _position;
-            this.velocity = new Vector(0, 0);
-            this.velocity.random(50, 200);
-
+            super();
+            this.velocity = new Vector(100, 0);
             this.scale = new Vector(0, 0);
             this.scale.set(this.position.y / 225, this.position.y / 225);
         }
@@ -37,7 +34,7 @@ namespace A010_2 {
             crc2.restore();
         }
 
-        
+
 
         move(_timeslice: number): void {
             let offset: Vector = new Vector(this.velocity.x, this.velocity.y);
@@ -51,4 +48,4 @@ namespace A010_2 {
                 this.position.x += crc2.canvas.width;
         }
     }
-    }
+}
