@@ -1,23 +1,39 @@
 namespace A010_2 {
     export class SitBird extends Moveable {
+       declare velocity: Vector;
         color: BirdColor;
         beakColor: string;
         scale: Vector;
         eating: boolean;
+        index: number;
 
-        constructor(_position: Vector, _color: BirdColor, _beakColor: string) {
-            super();
-            this.position = _position;
+    constructor(_position: Vector, _color: BirdColor, _beakColor: string) {
+            super(_position);
             this.color = _color;
             this.beakColor = _beakColor;
             this.scale = new Vector(0, 0);
             this.scale.set(this.position.y / 500, this.position.y / 500);
             this.velocity = new Vector(0, 0);
-            this.velocity.random(50, 100);
-            
+            this.velocity.random(50, 100, directions[Math.floor(Math.random() * directions.length)]);
 
             let values: boolean[] = [true, false];
             this.eating = values[Math.floor(Math.random() * values.length)];
+
+            this.index = randomBetween(0, 25);
+        }
+
+
+        checkUpdate(): Boolean | void {
+            if (this.index < 25) {
+                this.index++;
+                return false;
+            }
+            if (this.index == 25) {
+                this.index = 0;
+                return true;
+            }
+
+            
         }
 
         draw(): void {
@@ -165,7 +181,7 @@ namespace A010_2 {
 
         }
 
-        move(_timeslice: number): void {
+        eat(_timeslice: number): void {
             let offset: Vector = new Vector(this.velocity.x, this.velocity.y);
             offset.scale(_timeslice);
             this.position.add(offset);

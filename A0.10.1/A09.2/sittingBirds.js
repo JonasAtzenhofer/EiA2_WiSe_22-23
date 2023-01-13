@@ -5,17 +5,28 @@ var A010_2;
         beakColor;
         scale;
         eating;
+        index;
         constructor(_position, _color, _beakColor) {
-            super();
-            this.position = _position;
+            super(_position);
             this.color = _color;
             this.beakColor = _beakColor;
             this.scale = new A010_2.Vector(0, 0);
             this.scale.set(this.position.y / 500, this.position.y / 500);
             this.velocity = new A010_2.Vector(0, 0);
-            this.velocity.random(50, 100);
+            this.velocity.random(50, 100, A010_2.directions[Math.floor(Math.random() * A010_2.directions.length)]);
             let values = [true, false];
             this.eating = values[Math.floor(Math.random() * values.length)];
+            this.index = A010_2.randomBetween(0, 25);
+        }
+        checkUpdate() {
+            if (this.index < 25) {
+                this.index++;
+                return false;
+            }
+            if (this.index == 25) {
+                this.index = 0;
+                return true;
+            }
         }
         draw() {
             if (this.eating != true) {
@@ -135,7 +146,7 @@ var A010_2;
                 A010_2.crc2.setTransform(transform);
             }
         }
-        move(_timeslice) {
+        eat(_timeslice) {
             let offset = new A010_2.Vector(this.velocity.x, this.velocity.y);
             offset.scale(_timeslice);
             this.position.add(offset);

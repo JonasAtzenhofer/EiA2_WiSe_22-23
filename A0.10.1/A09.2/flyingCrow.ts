@@ -2,14 +2,19 @@ namespace A010_2 {
     export class FlyingCrows extends Moveable {
         
         scale: Vector;
+        declare velocity: Vector;
 
-        constructor(_position: Vector, _velocity: Vector) {
+        constructor(_position: Vector) {
             super(_position);
-           
-            this.velocity = _velocity.copy();
+            this.velocity = new Vector(0, 0);
+            this.velocity.random(50, 200, directions[Math.floor(Math.random() * directions.length)]);
+
+            this.scale = new Vector(0, 0);
+            this.scale.set(this.position.y / 225, this.position.y / 225);
         }
 
         draw(): void {
+            let start: DOMMatrix = crc2.getTransform();
             crc2.save();
             crc2.translate(this.position.x, this.position.y);
 
@@ -22,12 +27,12 @@ namespace A010_2 {
             crc2.stroke(path11);
             crc2.closePath();
             crc2.restore();
+            crc2.setTransform(start);
         }
 
 
 
-        move(_timeslice: number): void {
-            super.move(_timeslice);
+        fly(_timeslice: number): void {
             let offset: Vector = new Vector(this.velocity.x, this.velocity.y);
             offset.scale(_timeslice);
             this.position.add(offset);
