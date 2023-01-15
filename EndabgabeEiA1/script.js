@@ -152,23 +152,12 @@ var EndabgabeEiA1;
         }
         //die Funktion pickRandomElement wird aufgerufen, um eine zufällige Frage auszuwählen
         let question = pickRandomElement(questionsForCategory);
-        //die Funktion displayQuestion wird aufgerufen, um die Frage anzuzeigen
-        displayQuestion(question);
-        //die Funktion checkAnswer wird aufgerufen, um zu überprüfen, ob die Antwort richtig ist
         function pickRandomElement(array) {
             let randomIndex = Math.floor(Math.random() * array.length);
             return array[randomIndex];
         }
-        function checkAnswer(question, answer) {
-            return question.correctAnswer === answer;
-        }
-        let score = 0;
-        function updateScore(correct) {
-            if (correct) {
-                score++;
-            }
-            document.getElementById("score").innerHTML = `Punktestand: ${score}`;
-        }
+        //die Funktion displayQuestion wird aufgerufen, um die Frage anzuzeigen
+        displayQuestion(question);
         function displayQuestion(question) {
             document.getElementById("question").innerHTML = question.question;
             let answersContainer = document.getElementById("answers");
@@ -184,6 +173,16 @@ var EndabgabeEiA1;
                 answersContainer.appendChild(button);
             }
         }
+        function checkAnswer(question, answer) {
+            return question.correctAnswer === answer;
+        }
+        let score = 0;
+        function updateScore(correct) {
+            if (correct) {
+                score++;
+            }
+            document.getElementById("score").innerHTML = `Punktestand: ${score}`;
+        }
         function displayExplanation(question, correct) {
             let explanationContainer = document.getElementById("explanation");
             explanationContainer.innerHTML = "";
@@ -196,6 +195,7 @@ var EndabgabeEiA1;
                 linkElement.innerHTML = link;
             }
         }
+        displayNextQuestion();
         function displayNextQuestion() {
             let nextQuestion = pickRandomElement(questionsForCategory);
             displayQuestion(nextQuestion);

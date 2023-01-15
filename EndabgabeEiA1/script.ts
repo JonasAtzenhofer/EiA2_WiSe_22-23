@@ -13,7 +13,7 @@ namespace EndabgabeEiA1 {
             category: string;
         }
 
-
+       
 
 
         let questions: Question[] = [
@@ -173,9 +173,9 @@ namespace EndabgabeEiA1 {
 
         //die Funktion shuffleArray wird aufgerufen, um die Fragen zu mischen
         questionsForCategory = shuffleArray(questionsForCategory);
-        function shuffleArray(array: any[]): any[] {
+        function shuffleArray(array: Question[]): Question[] {
             for (let i: number = array.length - 1; i > 0; i--) {
-                const j: number  = Math.floor(Math.random() * (i + 1));
+                const j: number = Math.floor(Math.random() * (i + 1));
                 [array[i], array[j]] = [array[j], array[i]];
             }
             return array;
@@ -184,18 +184,31 @@ namespace EndabgabeEiA1 {
         //die Funktion pickRandomElement wird aufgerufen, um eine zufällige Frage auszuwählen
         let question: Question = pickRandomElement(questionsForCategory);
 
-        //die Funktion displayQuestion wird aufgerufen, um die Frage anzuzeigen
-        displayQuestion(question);
-
-        //die Funktion checkAnswer wird aufgerufen, um zu überprüfen, ob die Antwort richtig ist
-
-
-
-        function pickRandomElement(array: any[]): any {
+        function pickRandomElement(array: Question[]): Question {
             let randomIndex: number = Math.floor(Math.random() * array.length);
             return array[randomIndex];
         }
 
+        //die Funktion displayQuestion wird aufgerufen, um die Frage anzuzeigen
+        displayQuestion(question);
+
+        function displayQuestion(question: Question): void {
+            document.getElementById("question").innerHTML = question.question;
+            let answersContainer: HTMLElement = document.getElementById("answers");
+            answersContainer.innerHTML = "";
+            for (let answer of question.answers) {
+                let button: HTMLButtonElement = document.createElement("button");
+                button.innerHTML = answer;
+                button.addEventListener("click", () => {
+                    let correct: boolean = checkAnswer(question, answer);
+                    updateScore(correct);
+                    displayExplanation(question, correct);
+                });
+                answersContainer.appendChild(button);
+
+
+            }
+        }
 
 
 
@@ -212,23 +225,7 @@ namespace EndabgabeEiA1 {
             document.getElementById("score").innerHTML = `Punktestand: ${score}`;
         }
 
-        function displayQuestion(question: Question): void {
-            document.getElementById("question").innerHTML = question.question;
-            let answersContainer: HTMLElement = document.getElementById("answers");
-            answersContainer.innerHTML = "";
-            for (let answer of question.answers) {
-                let button: HTMLButtonElement = document.createElement("button");
-                button.innerHTML = answer;
-                button.addEventListener("click", () => {
-                    let  correct: boolean = checkAnswer(question, answer);
-                    updateScore(correct);
-                    displayExplanation(question, correct);
-                });
-                answersContainer.appendChild(button);
-
-
-            }
-        }
+        
 
         function displayExplanation(question: Question, correct: boolean): void {
             let explanationContainer: HTMLElement = document.getElementById("explanation");
@@ -246,13 +243,15 @@ namespace EndabgabeEiA1 {
 
         }
 
+        displayNextQuestion();
+
         function displayNextQuestion(): void {
             let nextQuestion: Question = pickRandomElement(questionsForCategory);
             displayQuestion(nextQuestion);
         }
 
-       
-        
+
+
 
 
 
