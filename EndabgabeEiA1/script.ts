@@ -13,7 +13,7 @@ namespace EndabgabeEiA1 {
             category: string;
         }
 
-       
+
 
 
         let questions: Question[] = [
@@ -154,6 +154,39 @@ namespace EndabgabeEiA1 {
 
         ];
 
+        console.log(questions[1]);
+
+        let htmlButton: HTMLButtonElement = <HTMLButtonElement>document.querySelector("#HTML");
+        let cssButton: HTMLButtonElement = <HTMLButtonElement>document.querySelector("#CSS");
+        let tsButton: HTMLButtonElement = <HTMLButtonElement>document.querySelector("#TypeScript");
+        let mixedButton: HTMLButtonElement = <HTMLButtonElement>document.querySelector("#Mixed");
+
+        htmlButton.addEventListener("click", handleHtmlButton);
+        cssButton.addEventListener("click", handleCssButton);
+        tsButton.addEventListener("click", handleTsButton);
+        //mixedButton.addEventListener("click", handleMixedButton);
+
+
+
+        function handleHtmlButton(): void {
+            let htmlQuestions: Question[] = questions.filter(q => q.category == "HTML");
+            displayQuestions(htmlQuestions);
+        }
+
+        function handleCssButton(): void {
+            let cssQuestions: Question[] = questions.filter(q => q.category == "CSS");
+            displayQuestions(cssQuestions);
+        }
+
+        function handleTsButton(): void {
+            let tsQuestions: Question[] = questions.filter(q => q.category == "TypeScript");
+            displayQuestions(tsQuestions);
+        }
+
+
+
+
+
         function getQuestionsForCategory(category: string): Question[] {
             if (category === "HTML") {
                 return questions.filter(question => question.question.includes("HTML"));
@@ -190,9 +223,9 @@ namespace EndabgabeEiA1 {
         }
 
         //die Funktion displayQuestion wird aufgerufen, um die Frage anzuzeigen
-        displayQuestion(question);
+        displayQuestions(question);
 
-        function displayQuestion(question: Question): void {
+        function displayQuestions(question: Question): void {
             document.getElementById("question").innerHTML = question.question;
             let answersContainer: HTMLElement = document.getElementById("answers");
             answersContainer.innerHTML = "";
@@ -225,7 +258,7 @@ namespace EndabgabeEiA1 {
             document.getElementById("score").innerHTML = `Punktestand: ${score}`;
         }
 
-        
+
 
         function displayExplanation(question: Question, correct: boolean): void {
             let explanationContainer: HTMLElement = document.getElementById("explanation");
@@ -247,19 +280,8 @@ namespace EndabgabeEiA1 {
 
         function displayNextQuestion(): void {
             let nextQuestion: Question = pickRandomElement(questionsForCategory);
-            displayQuestion(nextQuestion);
+            displayQuestions(nextQuestion);
         }
-
-
-
-
-
-
-
-
-
-
-
 
 
 

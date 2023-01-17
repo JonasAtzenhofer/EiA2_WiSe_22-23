@@ -124,6 +124,27 @@ var EndabgabeEiA1;
                 category: "TypeScript"
             }
         ];
+        console.log(questions[1]);
+        let htmlButton = document.querySelector("#HTML");
+        let cssButton = document.querySelector("#CSS");
+        let tsButton = document.querySelector("#TypeScript");
+        let mixedButton = document.querySelector("#Mixed");
+        htmlButton.addEventListener("click", handleHtmlButton);
+        cssButton.addEventListener("click", handleCssButton);
+        tsButton.addEventListener("click", handleTsButton);
+        //mixedButton.addEventListener("click", handleMixedButton);
+        function handleHtmlButton() {
+            let htmlQuestions = questions.filter(q => q.category == "HTML");
+            displayQuestions(htmlQuestions);
+        }
+        function handleCssButton() {
+            let cssQuestions = questions.filter(q => q.category == "CSS");
+            displayQuestions(cssQuestions);
+        }
+        function handleTsButton() {
+            let tsQuestions = questions.filter(q => q.category == "TypeScript");
+            displayQuestions(tsQuestions);
+        }
         function getQuestionsForCategory(category) {
             if (category === "HTML") {
                 return questions.filter(question => question.question.includes("HTML"));
@@ -157,8 +178,8 @@ var EndabgabeEiA1;
             return array[randomIndex];
         }
         //die Funktion displayQuestion wird aufgerufen, um die Frage anzuzeigen
-        displayQuestion(question);
-        function displayQuestion(question) {
+        displayQuestions(question);
+        function displayQuestions(question) {
             document.getElementById("question").innerHTML = question.question;
             let answersContainer = document.getElementById("answers");
             answersContainer.innerHTML = "";
@@ -198,7 +219,7 @@ var EndabgabeEiA1;
         displayNextQuestion();
         function displayNextQuestion() {
             let nextQuestion = pickRandomElement(questionsForCategory);
-            displayQuestion(nextQuestion);
+            displayQuestions(nextQuestion);
         }
     }
 })(EndabgabeEiA1 || (EndabgabeEiA1 = {}));
