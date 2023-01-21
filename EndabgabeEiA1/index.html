@@ -5,24 +5,44 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div id="category-select">
         <h1>Wählen Sie eine Kategorie</h1>
-        <button type="button" id="HTML">HTML</button>
-        <button type="button" id="CSS">CSS</button>
-        <button type="button" id="TypeScript">TypeScript</button>
-        <button type="button" id="Mixed">gemischt</button>
+        <button type="button" id="HTMLButton">HTML</button>
+        <button type="button" id="CSSButton">CSS</button>
+        <button type="button" id="TypeScriptButton">TypeScript</button>
+        <button type="button" id="MixedButton">gemischt</button>
     </div>
-        <div id="score"></div>
-        <div id="question"></div>
-        <div id="answers"></div>
-        <div id="explanation" style="display: none;"></div>
-        <div id="links" style="display: none;"></div>
-        <button type="button" id="next-question" style="display: none;">Weiter</button>
+    <div id="question">
+        <h1 id="question-text"></h1>
+        <button type="button" id="answer1"></button>
+        <button type="button" id="answer2"></button>
+        <button type="button" id="answer3"></button>
+        <button type="button" id="answer4"></button>
     </div>
+
+    <div id="htmlQuestion"></div>
+    <div id="htmlExplanation"></div>
+    <div id="htmlLink"></div>
+    <div id="cssQuestion"></div>
+    <div id="cssExplanation"></div>
+    <div id="cssLink"></div>
+    <div id="typeScriptQuestion"></div>
+    <div id="typeScriptExplanation"></div>
+    <div id="typeScriptLink"></div>
+    <div id="mixedQuestion"></div>
+    <div id="mixedExplanation"></div>
+    <div id="mixedLink"></div>
+
+
+    <button type="button" id="NextQuestion"> Nächste Frage</button>
+     
+
+
+
       
 </body>
 
