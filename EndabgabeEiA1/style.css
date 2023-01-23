@@ -2,6 +2,20 @@
 body {
     font-family: Arial, sans-serif;
     padding: 20px;
+    max-width: 375px;
+    max-height: 667px;
+    margin: auto;
+    /* Der Body soll von einer Schwarzen Linie umgeben sein, innerhalb dieser Linie soll es eine passende Hintergrund Farbe geben  */
+    border: 1px solid black;
+    /* Der Body soll sich mittig Zentral abgebildet werden */
+    text-align: center;
+    top: 50;
+   
+
+
+
+    
+
   }
   
   /* Kategorieauswahl */
@@ -22,101 +36,41 @@ body {
   #category-select button:hover {
     background-color: #3e8e41;
   }
-  
-  /* Quiz-Abschnitt */
+
   #quiz {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 10px;
-    background-color: #f2f2f2;
-    padding: 20px;
+    /* Die Frage #questio-text soll mittig Zentral abgebildet werden und gut lesbar sein */
     text-align: center;
+    font-size: 20px;
+    padding: 20px;
   }
   
-  #quiz #score {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 20px;
-  }
   
-  #quiz #question {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 24px;
-    margin-bottom: 20px;
-  }
   
-  #quiz #answers button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
-    
-    font-size: 18px;
-    padding: 10px 20px;
-    margin: 10px;
-    background-color: #f44336;
-    color: white;
-    border: none;
-    cursor: pointer;
-  }
-  
-  #quiz #answers button:hover {
-    background-color: #da190b;
-  }
-  
-  #quiz #check-answer {
-    font-size: 18px;
-    padding: 10px 20px;
-    margin: 10px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    cursor: pointer;
-  }
-  
-  #quiz #check-answer:hover {
-    background-color: #3e8e41;
-  }
-  
-  #quiz #explanation {
-    font-size: 18px;
-    margin-top: 20px;
-  }
-  
-  #quiz #links a {
-    color: blue;
-    text-decoration: underline;
-  }
-  
-  #quiz #next-question {
-    font-size: 18px;
-    padding: 10px 20px;
-    margin: 10px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    cursor: pointer;
-  }
-  
-  #quiz #next-question:hover {
-    background-color: #3e8e41;
-  }
 
 footer {
-  position: fixed;
+  
   bottom: 0;
   width: 100%;
-  height: 100px;
+  height: 80px;
   background-color: #f5f5f5;
   text-align: center;
-  padding: 10px;
+  padding: 0px;
   font-size: 15px;
   color: #777;
 
 }
+
+#category-select button {
+  transition: background-color 0.3s ease-in;
+
+  }
+  
+  #quiz button {
+  transition: background-color 0.3s ease-in;
+  border: 1px solid #ccc;
+  }
+  
+  #quiz #question-text {
+  transition: font-size 0.3s ease-in;
+  border: 1px solid #ccc;
+  }

@@ -174,6 +174,21 @@ namespace EndabgabeEiA1 {
         mixedButton.addEventListener("click", HTMLButtonStart);
     }
 
+    //nachdem ein Button gedrückt wurde sind die Buttons der Kategorien nicht mehr klickbar
+    function buttonsUncklickable(): void {
+        let htmlButton: HTMLButtonElement = document.getElementById("HTMLButton") as HTMLButtonElement;
+        htmlButton.removeEventListener("click", HTMLButtonStart);
+
+        let cssButton: HTMLButtonElement = document.getElementById("CSSButton") as HTMLButtonElement;
+        cssButton.removeEventListener("click", HTMLButtonStart);
+
+        let typeScriptButton: HTMLButtonElement = document.getElementById("TypeScriptButton") as HTMLButtonElement;
+        typeScriptButton.removeEventListener("click", HTMLButtonStart);
+
+        let mixedButton: HTMLButtonElement = document.getElementById("MixedButton") as HTMLButtonElement;
+        mixedButton.removeEventListener("click", HTMLButtonStart);
+    }
+
     //nun soll bei einem Klick auf die Buttons zufällig aus der jeweiligen Kategorie eine Frage und die dazu gehörigen Antwortmöglichkeiten angezeigt werden
 
     function HTMLButtonStart(_event: Event): void {
@@ -220,6 +235,7 @@ namespace EndabgabeEiA1 {
         }
         //nun soll die zufällig generierte Zahl in dem Array alreadyAskedQuestions gespeichert werden
         alreadyAskedQuestions.push(randomHTMLQuestion);
+
         //nun soll aus der Kategorie HTML eine zufällige Frage ausgesucht werden, und als String angezeigt werden
         //ebenfalls sollen die dazugehörigen ANtwortmöglichkeiten als klickbatte Buttons angezeigt werden
         //wenn die richtige Antwort gewählt wird soll der Counter um eins erhöht werden und die Erklärung plus Link angezeigt werden und ein Button zum nächsten Frage erscheinen
@@ -285,7 +301,7 @@ namespace EndabgabeEiA1 {
         let NextQuestion: HTMLButtonElement = document.getElementById("NextQuestion") as HTMLButtonElement;
         NextQuestion.addEventListener("click", HTMLButtonStart);
 
-        let htmlCounter: number = 0;
+        
     }
 
 

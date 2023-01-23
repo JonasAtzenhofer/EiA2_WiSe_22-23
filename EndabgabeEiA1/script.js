@@ -137,6 +137,17 @@ var EndabgabeEiA1;
         let mixedButton = document.getElementById("MixedButton");
         mixedButton.addEventListener("click", HTMLButtonStart);
     }
+    //nachdem ein Button gedrückt wurde sind die Buttons der Kategorien nicht mehr klickbar
+    function buttonsUncklickable() {
+        let htmlButton = document.getElementById("HTMLButton");
+        htmlButton.removeEventListener("click", HTMLButtonStart);
+        let cssButton = document.getElementById("CSSButton");
+        cssButton.removeEventListener("click", HTMLButtonStart);
+        let typeScriptButton = document.getElementById("TypeScriptButton");
+        typeScriptButton.removeEventListener("click", HTMLButtonStart);
+        let mixedButton = document.getElementById("MixedButton");
+        mixedButton.removeEventListener("click", HTMLButtonStart);
+    }
     //nun soll bei einem Klick auf die Buttons zufällig aus der jeweiligen Kategorie eine Frage und die dazu gehörigen Antwortmöglichkeiten angezeigt werden
     function HTMLButtonStart(_event) {
         let target = _event.target;
@@ -230,7 +241,6 @@ var EndabgabeEiA1;
         htmlLink.hidden = true;
         let NextQuestion = document.getElementById("NextQuestion");
         NextQuestion.addEventListener("click", HTMLButtonStart);
-        let htmlCounter = 0;
     }
     function checkAnswer(_event) {
         let target = _event.target;
