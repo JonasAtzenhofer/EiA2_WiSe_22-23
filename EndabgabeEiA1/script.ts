@@ -18,6 +18,7 @@ namespace EndabgabeEiA1 {
     let alreadyAskedQuestions: number[] = [];
     let category: string;
     
+    
 
 
 
@@ -174,21 +175,6 @@ namespace EndabgabeEiA1 {
         mixedButton.addEventListener("click", HTMLButtonStart);
     }
 
-    //nachdem ein Button gedrückt wurde sind die Buttons der Kategorien nicht mehr klickbar
-    function buttonsUncklickable(): void {
-        let htmlButton: HTMLButtonElement = document.getElementById("HTMLButton") as HTMLButtonElement;
-        htmlButton.removeEventListener("click", HTMLButtonStart);
-
-        let cssButton: HTMLButtonElement = document.getElementById("CSSButton") as HTMLButtonElement;
-        cssButton.removeEventListener("click", HTMLButtonStart);
-
-        let typeScriptButton: HTMLButtonElement = document.getElementById("TypeScriptButton") as HTMLButtonElement;
-        typeScriptButton.removeEventListener("click", HTMLButtonStart);
-
-        let mixedButton: HTMLButtonElement = document.getElementById("MixedButton") as HTMLButtonElement;
-        mixedButton.removeEventListener("click", HTMLButtonStart);
-    }
-
     //nun soll bei einem Klick auf die Buttons zufällig aus der jeweiligen Kategorie eine Frage und die dazu gehörigen Antwortmöglichkeiten angezeigt werden
 
     function HTMLButtonStart(_event: Event): void {
@@ -249,7 +235,7 @@ namespace EndabgabeEiA1 {
         htmlQuestion.innerHTML = randomHTMLQuestionString;
         htmlQuestion.hidden = false;
         //nun wird ein number Array erstellt dass bis zu 3 Zahlen enthält, diese werden dann geshuffelt und so werden die Antworten zufällig generiert
-        let randomAnswers: number[] = [0, 1, 2];
+        let randomAnswers: number[] = [0, 1, 2, 3];
         randomAnswers = shuffle(randomAnswers);
 
         function shuffle (_array: number[]): number[] {
@@ -325,7 +311,7 @@ namespace EndabgabeEiA1 {
             document.getElementById("answer4").hidden = true;
             document.getElementById("htmlQuestion").hidden = true;
             if (htmlCounter == 5 ) {
-                htmlExplanation.innerHTML = "Herzlichen Glückwunsch! Du hast alle Fragen richtig beantwortet!";
+                htmlExplanation.innerHTML = "Herzlichen Glückwunsch! Du hast alle Fragen richtig beantwortet! Wähle nun eine neue Kategorie aus!";
                 htmlLink.hidden = true;
                 NextQuestion.hidden = true;
                 //wenn alle Fragen richtig beantwortet wurden soll der Counter wieder auf 0 gesetzt werden
@@ -338,6 +324,7 @@ namespace EndabgabeEiA1 {
             alert("Diese Antwort ist leider falsch. Versuche es nochmal!");
         }
     }
+
 
 }
 

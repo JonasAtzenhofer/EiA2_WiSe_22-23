@@ -74,3 +74,12 @@ footer {
   transition: font-size 0.3s ease-in;
   border: 1px solid #ccc;
   }
+
+  #bar {
+    width: 100px;
+    height: 0px;
+    background-color: #4CAF50;
+    margin:auto;
+    text-align:center;
+    margin-top:20px;
+}

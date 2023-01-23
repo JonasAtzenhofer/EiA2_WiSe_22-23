@@ -137,17 +137,6 @@ var EndabgabeEiA1;
         let mixedButton = document.getElementById("MixedButton");
         mixedButton.addEventListener("click", HTMLButtonStart);
     }
-    //nachdem ein Button gedrückt wurde sind die Buttons der Kategorien nicht mehr klickbar
-    function buttonsUncklickable() {
-        let htmlButton = document.getElementById("HTMLButton");
-        htmlButton.removeEventListener("click", HTMLButtonStart);
-        let cssButton = document.getElementById("CSSButton");
-        cssButton.removeEventListener("click", HTMLButtonStart);
-        let typeScriptButton = document.getElementById("TypeScriptButton");
-        typeScriptButton.removeEventListener("click", HTMLButtonStart);
-        let mixedButton = document.getElementById("MixedButton");
-        mixedButton.removeEventListener("click", HTMLButtonStart);
-    }
     //nun soll bei einem Klick auf die Buttons zufällig aus der jeweiligen Kategorie eine Frage und die dazu gehörigen Antwortmöglichkeiten angezeigt werden
     function HTMLButtonStart(_event) {
         let target = _event.target;
@@ -200,7 +189,7 @@ var EndabgabeEiA1;
         htmlQuestion.innerHTML = randomHTMLQuestionString;
         htmlQuestion.hidden = false;
         //nun wird ein number Array erstellt dass bis zu 3 Zahlen enthält, diese werden dann geshuffelt und so werden die Antworten zufällig generiert
-        let randomAnswers = [0, 1, 2];
+        let randomAnswers = [0, 1, 2, 3];
         randomAnswers = shuffle(randomAnswers);
         function shuffle(_array) {
             let currentIndex = _array.length;
@@ -261,7 +250,7 @@ var EndabgabeEiA1;
             document.getElementById("answer4").hidden = true;
             document.getElementById("htmlQuestion").hidden = true;
             if (htmlCounter == 5) {
-                htmlExplanation.innerHTML = "Herzlichen Glückwunsch! Du hast alle Fragen richtig beantwortet!";
+                htmlExplanation.innerHTML = "Herzlichen Glückwunsch! Du hast alle Fragen richtig beantwortet! Wähle nun eine neue Kategorie aus!";
                 htmlLink.hidden = true;
                 NextQuestion.hidden = true;
                 //wenn alle Fragen richtig beantwortet wurden soll der Counter wieder auf 0 gesetzt werden
