@@ -2,7 +2,7 @@ namespace EndabgabeEiA1 {
 
     window.addEventListener("load", handleLoad);
 
-
+//ein Interface das die Struktur des Fragen Arrays festlegt
     interface Question {
         question: string;
         answers: string[];
@@ -12,8 +12,8 @@ namespace EndabgabeEiA1 {
         category: string;
     }
 
-
-    let randomHTMLQuestion: number;
+//variablen die später benötigt werden
+    let randomQuestion: number;
     let htmlCounter: number = 0;
     let alreadyAskedQuestions: number[] = [];
     let category: string;
@@ -23,7 +23,7 @@ namespace EndabgabeEiA1 {
     
 
 
-
+//das Fragen Array mit allen Fragen und Antworten und Erklärungen und Links und Kategorien
     let questions: Question[] = [
         {
             question: "Wie wird ein Absatz in HTML dargestellt?",
@@ -71,6 +71,34 @@ namespace EndabgabeEiA1 {
         },
 
         {
+            question: "Wie wird ein Textfeld in HTML dargestellt?",
+            answers: ["textarea", "textfield", "input", "inputtext"],
+            correctAnswer: "textarea",
+            explanation: "Ein Textfeld wird in HTML mit dem textarea-Tag dargestellt.",
+            links: "https://www.w3schools.com/tags/tag_textarea.asp",
+            category: "HTML"
+        },
+
+        {
+            question: "Wie wird ein Listenelement in HTML dargestellt?",
+            answers: ["li", "list", "ul", "ol"],
+            correctAnswer: "li",
+            explanation: "Ein Listenelement wird in HTML mit dem li-Tag dargestellt.",
+            links: "https://www.w3schools.com/tags/tag_li.asp",
+            category: "HTML"
+        },
+
+        {
+            question: "Wie wird eine ungeordnete Liste in HTML dargestellt?",
+            answers: ["ul", "list", "li", "ol"],
+            correctAnswer: "ul",
+            explanation: "Eine ungeordnete Liste wird in HTML mit dem ul-Tag dargestellt.",
+            links: "https://www.w3schools.com/tags/tag_ul.asp",
+            category: "HTML"
+        },
+
+
+        {
             question: "Wie wird in CSS ein Element ausgewählt?",
             answers: ["#id", ".class", "element", "tag"],
             correctAnswer: "element",
@@ -116,8 +144,35 @@ namespace EndabgabeEiA1 {
         },
 
         {
+            question: "Wie wird in CSS ein Nachfolger ausgewählt?",
+            answers: ["element größer gleich element", "element element", "element + element", "element ~ element"],
+            correctAnswer: "element + element",
+            explanation: "In CSS wird ein Nachfolger mit einem + ausgewählt.",
+            links: "https://www.w3schools.com/cssref/css_selectors.asp",
+            category: "CSS"
+        },
+
+        {
+            question: "Wie setzt man Keyframes in CSS?",
+            answers: ["@keyframes", "@frames", "@keyframe", "@frame"],
+            correctAnswer: "@keyframes",
+            explanation: "In CSS werden Keyframes mit @keyframes gesetzt.",
+            links: "https://www.w3schools.com/cssref/css3_pr_animation-keyframes.asp",
+            category: "CSS"
+        },
+
+        {
+            question: "Wie wird in CSS ein Pseudoklasse ausgewählt?",
+            answers: ["element:pseudoklasse", "element::pseudoklasse", "element:pseudoklasse()", "element::pseudoklasse()"],
+            correctAnswer: "element::pseudoklasse",
+            explanation: "In CSS wird eine Pseudoklasse mit :: ausgewählt.",
+            links: "https://www.w3schools.com/cssref/css_selectors.asp",
+            category: "CSS"
+        },
+
+        {
             question: "Wie wird in TypeScript eine Variable deklariert?",
-            answers: ["let", "var", "const", "int"],
+            answers: ["let", "variable", "const", "int"],
             correctAnswer: "let",
             explanation: "In TypeScript wird eine Variable mit let deklariert.",
             links: "https://www.w3schools.com/js/js_let.asp",
@@ -158,83 +213,108 @@ namespace EndabgabeEiA1 {
             explanation: "In TypeScript wird ein Interface mit interface deklariert.",
             links: "https://www.w3schools.com/js/js_classes.asp",
             category: "TypeScript"
+        },
+
+        {
+            question: "Wie wird in TypeScript eine Schleife deklariert?",
+            answers: ["für", "for", "forever", "loop"],
+            correctAnswer: "for",
+            explanation: "In TypeScript wird eine Schleife mit for deklariert.",
+            links: "https://www.w3schools.com/js/js_loop_for.asp",
+            category: "TypeScript"
+
+        },
+
+        {
+            question: "Wie wird in TypeScript eine Bedingung deklariert?",
+            answers: ["if", "##", "else", "Banane"],
+            correctAnswer: "if",
+            explanation: "In TypeScript wird eine Bedingung mit if deklariert.",
+            links: "https://www.w3schools.com/js/js_if_else.asp",
+            category: "TypeScript"
+        },
+
+        {
+            question: "Wie wird in TypeScript ein Array deklariert?",
+            answers: ["Apfel", "array()", "array{}", "array[]"],
+            correctAnswer: "array[]",
+            explanation: "In TypeScript wird ein Array mit array[] deklariert.",
+            links: "https://www.w3schools.com/js/js_arrays.asp",
+            category: "TypeScript"
         }
+
+
 
     ];
 
+    
+
+//Nun werden Event Listener auf die einzelnen Buttons gesetzt, die bei einem Klick die Funktion StartQuiz aufrufen
     function handleLoad(_event: Event): void {
 
         let htmlButton: HTMLButtonElement = document.getElementById("HTMLButton") as HTMLButtonElement;
-        htmlButton.addEventListener("click", HTMLButtonStart);
+        htmlButton.addEventListener("click", startQuiz);
 
         let cssButton: HTMLButtonElement = document.getElementById("CSSButton") as HTMLButtonElement;
-        cssButton.addEventListener("click", HTMLButtonStart);
+        cssButton.addEventListener("click", startQuiz);
 
         let typeScriptButton: HTMLButtonElement = document.getElementById("TypeScriptButton") as HTMLButtonElement;
-        typeScriptButton.addEventListener("click", HTMLButtonStart);
+        typeScriptButton.addEventListener("click", startQuiz);
 
         let mixedButton: HTMLButtonElement = document.getElementById("MixedButton") as HTMLButtonElement;
-        mixedButton.addEventListener("click", HTMLButtonStart);
+        mixedButton.addEventListener("click", startQuiz);
     }
 
     //nun soll bei einem Klick auf die Buttons zufällig aus der jeweiligen Kategorie eine Frage und die dazu gehörigen Antwortmöglichkeiten angezeigt werden
 
-    function HTMLButtonStart(_event: Event): void {
+    function startQuiz(_event: Event): void {
         let target: HTMLButtonElement = <HTMLButtonElement>_event.target;
         if (target.innerHTML == "HTML" || category == "HTML") {
             //wenn HTML ausgewählt wurde, setzt man die Katgeorie auf HTML
             category = "HTML";
-            randomHTMLQuestion = Math.floor(Math.random() * 5);
+            randomQuestion = Math.floor(Math.random() * 8);
             //nun werden so lange ZUfallszahlen generiert bis eine Zahl gefunden wird, die noch nicht in dem Array alreadyAskedQuestions ist 
-            while (alreadyAskedQuestions.includes(randomHTMLQuestion)) {
-                randomHTMLQuestion = Math.floor(Math.random() * 5);
+            while (alreadyAskedQuestions.includes(randomQuestion)) {
+                randomQuestion = Math.floor(Math.random() * 8);
                 
             }
         }
         if (target.innerHTML == "CSS" || category == "CSS") {
             //wenn CSS ausgewählt wurde setzt man die Kategorie auf CSS
             category = "CSS";
-            randomHTMLQuestion = Math.floor(Math.random() * 5) + 5;
+            randomQuestion = Math.floor(Math.random() * 8) + 8;
             //nun werden so lange ZUfallszahlen generiert bis eine Zahl gefunden wird, die noch nicht in dem Array alreadyAskedQuestions ist
-            while (alreadyAskedQuestions.includes(randomHTMLQuestion)) {
-                randomHTMLQuestion = Math.floor(Math.random() * 5) + 5;
+            while (alreadyAskedQuestions.includes(randomQuestion)) {
+                randomQuestion = Math.floor(Math.random() * 8) + 8;
             }
 
         }
         if (target.innerHTML == "TypeScript" || category == "TypeScript") {
             //wenn TypeScript ausgewählt wurde setzt man die Kategorie auf TypeScript
             category = "TypeScript";
-            randomHTMLQuestion = Math.floor(Math.random() * 5) + 10;
+            randomQuestion = Math.floor(Math.random() * 8) + 16;
             //nun werden so lange ZUfallszahlen generiert bis eine Zahl gefunden wird, die noch nicht in dem Array alreadyAskedQuestions ist
-            while (alreadyAskedQuestions.includes(randomHTMLQuestion)) {
-                randomHTMLQuestion = Math.floor(Math.random() * 5) + 10;
+            while (alreadyAskedQuestions.includes(randomQuestion)) {
+                randomQuestion = Math.floor(Math.random() * 8) + 16;
             }
         }
         if (target.innerHTML == "Mixed" || category == "Mixed") {
             //wenn Mixed ausgewählt wurde setzt man die Katgeorie auf Mixed
             category = "Mixed";
-            randomHTMLQuestion = Math.floor(Math.random() * 15);
+            randomQuestion = Math.floor(Math.random() * 24);
             //nun werden so lange Zufallszahlen generiert bis eine Zahl gefunden wird, die noch nicht in dem Array alreadyAskedQuestions ist
-            while (alreadyAskedQuestions.includes(randomHTMLQuestion)) {
-                randomHTMLQuestion = Math.floor(Math.random() * 15);
+            while (alreadyAskedQuestions.includes(randomQuestion)) {
+                randomQuestion = Math.floor(Math.random() * 24);
             }
 
 
         }
         //nun soll die zufällig generierte Zahl in dem Array alreadyAskedQuestions gespeichert werden
-        alreadyAskedQuestions.push(randomHTMLQuestion);
-
-        //nun soll aus der Kategorie HTML eine zufällige Frage ausgesucht werden, und als String angezeigt werden
-        //ebenfalls sollen die dazugehörigen ANtwortmöglichkeiten als klickbatte Buttons angezeigt werden
-        //wenn die richtige Antwort gewählt wird soll der Counter um eins erhöht werden und die Erklärung plus Link angezeigt werden und ein Button zum nächsten Frage erscheinen
-        //wenn die falsche ANtwort geklickt wird dann soll ein ALert erscheinen dass die Antwort falsch ist und er es nochmal versuchen soll
-        //wenn alle 5 Fragen aus einer Kategorie richtig beantwortet wurden soll er eine Nachricht bekommen dass er alle Fragen richtig beantwortet hat und er auf den Button klicken soll um zur nächsten Kategorie zu gelangen
-        //wenn er auf den Button klickt soll er wieder die Auswahl zwischen den Kategorien sehen
-
+        alreadyAskedQuestions.push(randomQuestion);
         
-        let randomHTMLQuestionString: string = questions[randomHTMLQuestion].question;
+        let randomQuestionString: string = questions[randomQuestion].question;
         let htmlQuestion: HTMLParagraphElement = document.getElementById("htmlQuestion") as HTMLParagraphElement;
-        htmlQuestion.innerHTML = randomHTMLQuestionString;
+        htmlQuestion.innerHTML = randomQuestionString;
         htmlQuestion.hidden = false;
         //nun wird ein number Array erstellt dass bis zu 3 Zahlen enthält, diese werden dann geshuffelt und so werden die Antworten zufällig generiert
         let randomAnswers: number[] = [0, 1, 2, 3];
@@ -258,48 +338,53 @@ namespace EndabgabeEiA1 {
 
         let htmlAnswer1: HTMLButtonElement = document.getElementById("answer1") as HTMLButtonElement;
         //nun wird das erste Element des Arrays randomAnswers genommen und als Index für das Array answers genommen
-        htmlAnswer1.innerHTML = questions[randomHTMLQuestion].answers[randomAnswers[0]];
+        htmlAnswer1.innerHTML = questions[randomQuestion].answers[randomAnswers[0]];
         htmlAnswer1.addEventListener("click", checkAnswer);
         htmlAnswer1.hidden = false;
 
         let htmlAnswer2: HTMLButtonElement = document.getElementById("answer2") as HTMLButtonElement;
-        htmlAnswer2.innerHTML = questions[randomHTMLQuestion].answers[randomAnswers[1]];
+        //nun wird das zweite Element des Arrays randomAnswers genommen und als Index für das Array answers genommen
+        htmlAnswer2.innerHTML = questions[randomQuestion].answers[randomAnswers[1]];
         htmlAnswer2.addEventListener("click", checkAnswer);
         htmlAnswer2.hidden = false;
 
         let htmlAnswer3: HTMLButtonElement = document.getElementById("answer3") as HTMLButtonElement;
-        htmlAnswer3.innerHTML = questions[randomHTMLQuestion].answers[randomAnswers[2]];
+        //nun wird das dritte Element des Arrays randomAnswers genommen und als Index für das Array answers genommen
+        htmlAnswer3.innerHTML = questions[randomQuestion].answers[randomAnswers[2]];
         htmlAnswer3.addEventListener("click", checkAnswer);
         htmlAnswer3.hidden = false;
 
         let htmlAnswer4: HTMLButtonElement = document.getElementById("answer4") as HTMLButtonElement;
-        htmlAnswer4.innerHTML = questions[randomHTMLQuestion].answers[randomAnswers[3]];
+        //nun wird das vierte Element des Arrays randomAnswers genommen und als Index für das Array answers genommen
+        htmlAnswer4.innerHTML = questions[randomQuestion].answers[randomAnswers[3]];
         htmlAnswer4.addEventListener("click", checkAnswer);
         htmlAnswer4.hidden = false;
 
         let htmlExplanation: HTMLParagraphElement = document.getElementById("htmlExplanation") as HTMLParagraphElement;
-        htmlExplanation.innerHTML = questions[randomHTMLQuestion].explanation;
+        htmlExplanation.innerHTML = questions[randomQuestion].explanation;
         htmlExplanation.hidden = true;
 
         let htmlLink: HTMLAnchorElement = document.getElementById("htmlLink") as HTMLAnchorElement;
-        htmlLink.href = questions[randomHTMLQuestion].links;
-        htmlLink.innerHTML = questions[randomHTMLQuestion].links;
+        htmlLink.href = questions[randomQuestion].links;
+        htmlLink.innerHTML = questions[randomQuestion].links;
         htmlLink.hidden = true;
 
         let NextQuestion: HTMLButtonElement = document.getElementById("NextQuestion") as HTMLButtonElement;
-        NextQuestion.addEventListener("click", HTMLButtonStart);
+        NextQuestion.addEventListener("click", startQuiz);
 
         
     }
-
-    
+//wenn die richtige Antwort gewählt wird soll der Counter um eins erhöht werden und die Erklärung plus Link angezeigt werden und ein Button zum nächsten Frage erscheinen
+//wenn die falsche ANtwort geklickt wird dann soll ein ALert erscheinen dass die Antwort falsch ist und er es nochmal versuchen soll
+//wenn alle 5 Fragen aus einer Kategorie richtig beantwortet wurden soll er eine Nachricht bekommen dass er alle Fragen richtig beantwortet,
+//hat und er auf den Button klicken soll um zur nächsten Kategorie zu gelangen
     function checkAnswer(_event: Event): void {
         let target: HTMLButtonElement = <HTMLButtonElement>_event.target;
         console.log(target.innerHTML);
-        console.log(questions[randomHTMLQuestion].correctAnswer);
+        console.log(questions[randomQuestion].correctAnswer);
         console.log("arsch");
 
-        if (target.innerHTML == questions[randomHTMLQuestion].correctAnswer) {
+        if (target.innerHTML == questions[randomQuestion].correctAnswer) {
             htmlCounter++;
             document.getElementById("counter").innerHTML = htmlCounter.toString();
             let htmlExplanation: HTMLElement = document.getElementById("htmlExplanation");
@@ -315,7 +400,7 @@ namespace EndabgabeEiA1 {
             document.getElementById("answer4").hidden = true;
             document.getElementById("htmlQuestion").hidden = true;
             if (htmlCounter == 5 ) {
-                htmlExplanation.innerHTML = "Herzlichen Glückwunsch! Du hast alle Fragen richtig beantwortet! Wähle nun eine neue Kategorie aus!";
+                htmlExplanation.innerHTML = "Herzlichen Glückwunsch! Du hast 5 Fragen richtig beantwortet! Wähle nun eine neue Kategorie aus!";
                 htmlLink.hidden = true;
                 NextQuestion.hidden = true;
                 //wenn alle Fragen richtig beantwortet wurden soll der Counter wieder auf 0 gesetzt werden
@@ -325,15 +410,10 @@ namespace EndabgabeEiA1 {
               
             }
         } else {
+        //bei falscher ANtwort soll ein Alert erscheinen
             alert("Diese Antwort ist leider falsch. Versuche es nochmal!");
-        }
-
-        
-
-       
+        }  
     }
-
-
 }
 
 

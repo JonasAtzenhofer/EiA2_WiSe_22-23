@@ -120,6 +120,42 @@ h1 {
   }
   }
 
+  #htmlExplanation {
+    /* Die Erklärungen sollen animiert werden */
+    font-size: 20px;
+  text-align: center;
+  animation: headline 0.5s ease-in-out forwards;
+  }
+
+  @keyframes headline {
+  0% {
+  transform: translateY(-50px);
+  opacity: 0;
+  }
+  100% {
+  transform: translateY(0);
+  opacity: 1;
+  }
+  }
+
+  #htmlLink {
+    /* Die Links sollen animiert werden */
+    font-size: 20px;
+  text-align: center;
+  animation: headline 0.5s ease-in-out forwards;
+  }
+  @keyframes headline {
+    0% {
+    transform: translateX(-50px);
+    opacity: 0;
+    }
+    100% {
+    transform: translateX(0);
+    opacity: 1;
+    }
+  }
+  
+
   #answer1 , #answer2 , #answer3 , #answer4 {
     /* Die Antworten sollen animiert werden */
     font-size: 15px;
@@ -183,7 +219,7 @@ h1 {
     
     button {
     animation: button-animation 0.5s ease-in-out;
-    animation-iteration-count: 5;
+    animation-iteration-count: 7;
     }
     
     /* Optional: Beim Hover-Effekt die Animation pausieren */
@@ -191,18 +227,5 @@ h1 {
     animation-play-state: paused;
     }
 
-  #chart {
-    position: fixed;
-    width: 300px;
-    height: 30px;
-    background-color: rgb(255, 255, 255);
-}
 
-#progressbar {
-    position: absolute;
-    width: 20%;
-    height: 100%;
-    background: #ff0000;
-    bottom: 0;
-}
     
