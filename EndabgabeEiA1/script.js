@@ -338,6 +338,8 @@ var EndabgabeEiA1;
         else {
             //bei falscher ANtwort soll ein Alert erscheinen
             alert("Diese Antwort ist leider falsch. Versuche es nochmal!");
+            //der ausgewählte Button soll auf hidden gesetzt werden dass man dieselbe Antwort nicht mehrmals auswählen kann
+            target.hidden = true;
         }
     }
 })(EndabgabeEiA1 || (EndabgabeEiA1 = {}));
