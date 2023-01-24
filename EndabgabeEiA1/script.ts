@@ -17,6 +17,8 @@ namespace EndabgabeEiA1 {
     let htmlCounter: number = 0;
     let alreadyAskedQuestions: number[] = [];
     let category: string;
+
+   
     
     
 
@@ -290,11 +292,13 @@ namespace EndabgabeEiA1 {
         
     }
 
-
+    
     function checkAnswer(_event: Event): void {
         let target: HTMLButtonElement = <HTMLButtonElement>_event.target;
         console.log(target.innerHTML);
         console.log(questions[randomHTMLQuestion].correctAnswer);
+        console.log("arsch");
+
         if (target.innerHTML == questions[randomHTMLQuestion].correctAnswer) {
             htmlCounter++;
             document.getElementById("counter").innerHTML = htmlCounter.toString();
@@ -323,6 +327,10 @@ namespace EndabgabeEiA1 {
         } else {
             alert("Diese Antwort ist leider falsch. Versuche es nochmal!");
         }
+
+        
+
+       
     }
 
 
