@@ -399,28 +399,36 @@ namespace EndabgabeEiA1 {
             document.getElementById("answer4").hidden = true;
             document.getElementById("htmlQuestion").hidden = true;
             if (htmlCounter == 5 ) {
-                htmlExplanation.innerHTML = "Herzlichen Glückwunsch! Du hast 5 Fragen richtig beantwortet! Wähle nun eine neue Kategorie aus!";
+                htmlExplanation.innerHTML = "Herzlichen Glückwunsch! Du hast 5 Fragen richtig beantwortet! Spiele nun die nächste Kategorie durch klicken auf den jeweiligen Button";
                 htmlLink.hidden = true;
                 NextQuestion.hidden = true;
                 //wenn alle Fragen richtig beantwortet wurden soll der Counter wieder auf 0 gesetzt werden
                 htmlCounter = 0;
                 //nun sollen wieder alle Fragen bereitgestellt werden
                 alreadyAskedQuestions = [];
+               
+
+
               
             }
         } else {
         //bei falscher ANtwort soll ein Alert erscheinen
-            alert("Diese Antwort ist leider falsch. Versuche es nochmal!");
-            //der ausgewählte Button soll auf hidden gesetzt werden dass man dieselbe Antwort nicht mehrmals auswählen kann
-            target.hidden = true;
+            alert("Diese Antwort ist leider falsch");
+           
 
-            
+            //der nutzer soll wenn er eine Frage falsch beantwortet hat, eine neue Frage bekommen
+            startQuiz(_event);
 
+            //beantwortet der Nutzer zu viele Fragen falsch, werden die Fragen wiederholt
+            if (htmlCounter == 0) {
+                alreadyAskedQuestions = [];
+                
 
 
 
         }  
     }
+}
 }
 
 
