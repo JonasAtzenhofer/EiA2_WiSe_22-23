@@ -309,9 +309,8 @@ var EndabgabeEiA1;
     //hat und er auf den Button klicken soll um zur nächsten Kategorie zu gelangen
     function checkAnswer(_event) {
         let target = _event.target;
-        console.log(target.innerHTML);
-        console.log(questions[randomQuestion].correctAnswer);
-        console.log("arsch");
+        //console.log(target.innerHTML);
+        //console.log(questions[randomQuestion].correctAnswer);
         if (target.innerHTML == questions[randomQuestion].correctAnswer) {
             htmlCounter++;
             document.getElementById("counter").innerHTML = htmlCounter.toString();
